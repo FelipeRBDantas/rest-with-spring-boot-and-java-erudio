@@ -1,5 +1,6 @@
 package br.com.feliperbdantas.controllers;
 
+import br.com.feliperbdantas.exception.UnsupportedMathOperationException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,13 +13,15 @@ public class MathController {
             @PathVariable("numberOne") String numberOne,
             @PathVariable("numberTwo") String numberTwo
     ) {
-        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new IllegalArgumentException();
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
 
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
     }
 
     private Double convertToDouble(String strNumber) {
-        if (strNumber == null || strNumber.isBlank()) throw new IllegalArgumentException();
+        if (strNumber == null || strNumber.isBlank())
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
 
         String number  = strNumber.replace(",", ".");
 
