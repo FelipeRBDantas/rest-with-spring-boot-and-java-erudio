@@ -11,17 +11,25 @@ public class MathController {
     public Double sum(
             @PathVariable("numberOne") String numberOne,
             @PathVariable("numberTwo") String numberTwo
-    ) throws Exception {
+    ) {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new IllegalArgumentException();
 
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
     }
 
-    private Double convertToDouble(String numberOne) {
-        return 1D;
+    private Double convertToDouble(String strNumber) {
+        if (strNumber == null || strNumber.isBlank()) throw new IllegalArgumentException();
+
+        String number  = strNumber.replace(",", ".");
+
+        return Double.parseDouble(number);
     }
 
-    private boolean isNumeric(String numberOne) {
-        return true;
+    private boolean isNumeric(String strNumber) {
+        if (strNumber == null || strNumber.isBlank()) return false;
+
+        String number  = strNumber.replace(",", ".");
+
+        return number.matches("[-+]?[0-9]*\\.?[0-9]+");
     }
 }
