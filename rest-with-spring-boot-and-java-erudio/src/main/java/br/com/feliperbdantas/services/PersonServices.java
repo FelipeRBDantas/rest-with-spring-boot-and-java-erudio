@@ -8,6 +8,7 @@ import br.com.feliperbdantas.model.Person;
 import br.com.feliperbdantas.repository.PersonRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,10 +49,7 @@ public class PersonServices {
         Person entity = repository.findById(person.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No Records found for this ID."));
 
-        entity.setFirstName(person.getFirstName());
-        entity.setLastName(person.getLastName());
-        entity.setAddress(person.getAddress());
-        entity.setGender(person.getGender());
+        BeanUtils.copyProperties(person, entity, "id");
 
         return parseObject(repository.save(entity), PersonDTO.class);
     }
