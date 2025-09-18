@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 public class PersonMapper {
@@ -85,15 +86,15 @@ public class PersonMapper {
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    public Set<Person> convertDTOsToEntities(List<PersonDTO> persons) {
-        return persons.stream()
-                .map(this::convertDTOToEntity)
+    public Set<Person> updateDTOsToEntities(List<PersonDTO> persons, List<Person> existingPersons) {
+        return IntStream.range(0, persons.size())
+                .mapToObj(i -> updateEntityFromDTO(persons.get(i), existingPersons.get(i)))
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    public Set<Person> convertDTOsToEntitiesV2(List<PersonDTOV2> persons) {
-        return persons.stream()
-                .map(this::convertDTOToEntityV2)
+    public Set<Person> updateDTOsToEntitiesV2(List<PersonDTOV2> persons, List<Person> existingPersons) {
+        return IntStream.range(0, persons.size())
+                .mapToObj(i -> updateEntityFromDTOV2(persons.get(i), existingPersons.get(i)))
                 .collect(Collectors.toUnmodifiableSet());
     }
 }

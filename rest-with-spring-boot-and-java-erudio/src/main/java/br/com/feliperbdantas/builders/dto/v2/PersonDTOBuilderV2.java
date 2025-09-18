@@ -44,6 +44,7 @@ public class PersonDTOBuilderV2 {
 
         return this;
     }
+
     public PersonDTOBuilderV2 birthDay(Date birthDay) {
         dto.setBirthDay(birthDay);
 
