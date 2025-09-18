@@ -17,6 +17,7 @@ public class PersonController {
     private PersonServices service;
 
     @GetMapping(
+            name = "/v1",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public List<PersonDTO> findAll() {
@@ -24,6 +25,7 @@ public class PersonController {
     }
 
     @GetMapping(
+            name = "/v1",
             value = "/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -32,6 +34,7 @@ public class PersonController {
     }
 
     @PostMapping(
+            name = "/v1",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -48,6 +51,7 @@ public class PersonController {
     }
 
     @PutMapping(
+            name = "/v1",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -55,7 +59,10 @@ public class PersonController {
         return service.update(person);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(
+            name = "/v1",
+            value = "/{id}"
+    )
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         service.delete(id);
 
