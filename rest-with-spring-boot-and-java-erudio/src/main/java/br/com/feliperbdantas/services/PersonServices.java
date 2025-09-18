@@ -1,6 +1,7 @@
 package br.com.feliperbdantas.services;
 
-import br.com.feliperbdantas.data.dto.PersonDTO;
+import br.com.feliperbdantas.data.dto.v1.PersonDTO;
+import br.com.feliperbdantas.data.dto.v2.PersonDTOV2;
 import br.com.feliperbdantas.exception.ResourceNotFoundException;
 import static br.com.feliperbdantas.mapper.ObjectMapper.parseObject;
 import static br.com.feliperbdantas.mapper.ObjectMapper.parseListObjects;
@@ -43,6 +44,14 @@ public class PersonServices {
 
         return parseObject(repository.save(entity), PersonDTO.class);
     }
+    public PersonDTOV2 create(PersonDTOV2 person) {
+        logger.info("Creating one Person.");
+
+        var entity = parseObject(person, Person.class);
+
+        return parseObject(repository.save(entity), PersonDTOV2.class);
+    }
+
     public PersonDTO update(PersonDTO person) {
         logger.info("Updating one Person.");
 

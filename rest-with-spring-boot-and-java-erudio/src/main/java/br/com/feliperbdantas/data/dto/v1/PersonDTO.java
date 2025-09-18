@@ -1,4 +1,4 @@
-package br.com.feliperbdantas.data.dto;
+package br.com.feliperbdantas.data.dto.v1;
 
 import java.util.Objects;
 

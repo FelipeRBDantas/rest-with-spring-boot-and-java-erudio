@@ -3,7 +3,7 @@ import static br.com.feliperbdantas.mapper.ObjectMapper.parseListObjects;
 import static br.com.feliperbdantas.mapper.ObjectMapper.parseObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import br.com.feliperbdantas.data.dto.PersonDTO;
+import br.com.feliperbdantas.data.dto.v1.PersonDTO;
 import br.com.feliperbdantas.model.Person;
 import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
