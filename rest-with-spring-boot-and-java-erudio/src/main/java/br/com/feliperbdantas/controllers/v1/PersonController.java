@@ -1,8 +1,7 @@
-package br.com.feliperbdantas.controllers;
+package br.com.feliperbdantas.controllers.v1;
 
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
-import br.com.feliperbdantas.data.dto.v2.PersonDTOV2;
-import br.com.feliperbdantas.services.PersonServices;
+import br.com.feliperbdantas.services.v1.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,15 +9,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/person")
+@RestController("personControllerV1")
+@RequestMapping("/v1/person")
 public class PersonController {
     @Autowired
-    private PersonServices service;
+    private PersonService service;
 
     @GetMapping(
-            name = "/person/v1/findAll",
-            value = "/v1",
+            name = "/v1/person/findAll",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public List<PersonDTO> findAll() {
@@ -26,8 +24,8 @@ public class PersonController {
     }
 
     @GetMapping(
-            name = "/person/v1/findById",
-            value = "v1/{id}",
+            name = "/v1/person/findById",
+            value = "/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public PersonDTO findById(@PathVariable("id") Long id) {
@@ -35,27 +33,16 @@ public class PersonController {
     }
 
     @PostMapping(
-            name = "/person/v1/create",
-            value = "/v1",
+            name = "/v1/person/create",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public PersonDTO create(@RequestBody PersonDTO person) {
         return service.create(person);
     }
-    @PostMapping(
-            name = "/person/v2/create",
-            value = "/v2",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public PersonDTOV2 createV2(@RequestBody PersonDTOV2 person) {
-        return service.createV2(person);
-    }
 
     @PutMapping(
-            name = "/person/v1/update",
-            value = "/v1",
+            name = "/v1/person/update",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -64,8 +51,8 @@ public class PersonController {
     }
 
     @DeleteMapping(
-            name = "/person/v1/delete",
-            value = "/v1/{id}"
+            name = "/v1/person/delete",
+            value = "/{id}"
     )
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         service.delete(id);

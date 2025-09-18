@@ -3,7 +3,7 @@ package br.com.feliperbdantas.data.dto.v2;
 import java.util.Date;
 import java.util.Objects;
 
-public class PersonDTOV2 {
+public class PersonDTO {
     private static final long serialVersionUID = 1L;
 
     private Long id;
@@ -13,7 +13,7 @@ public class PersonDTOV2 {
     private String gender;
     private Date birthDay;
 
-    public PersonDTOV2() {}
+    public PersonDTO() {}
 
     public Long getId() {
         return id;
@@ -67,7 +67,7 @@ public class PersonDTOV2 {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
 
-        PersonDTOV2 personDTO = (PersonDTOV2) o;
+        PersonDTO personDTO = (PersonDTO) o;
 
         return Objects.equals(getId(), personDTO.getId()) && Objects.equals(getFirstName(), personDTO.getFirstName()) && Objects.equals(getLastName(), personDTO.getLastName()) && Objects.equals(getAddress(), personDTO.getAddress()) && Objects.equals(getGender(), personDTO.getGender()) && Objects.equals(getBirthDay(), personDTO.getBirthDay());
     }
