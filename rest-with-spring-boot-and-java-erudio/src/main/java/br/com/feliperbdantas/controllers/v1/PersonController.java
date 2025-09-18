@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController("personControllerV1")
@@ -19,8 +20,8 @@ public class PersonController {
             name = "/v1/person/findAll",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public List<PersonDTO> findAll() {
-        return service.findAll();
+    public ResponseEntity<List<PersonDTO>> findAll() {
+        return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping(
@@ -28,8 +29,8 @@ public class PersonController {
             value = "/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public PersonDTO findById(@PathVariable("id") Long id) {
-        return service.findById(id);
+    public ResponseEntity<PersonDTO> findById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(service.findById(id));
     }
 
     @PostMapping(
@@ -37,8 +38,12 @@ public class PersonController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public PersonDTO create(@RequestBody PersonDTO person) {
-        return service.create(person);
+    public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO person) {
+        PersonDTO personCreated = service.create(person);
+
+        return ResponseEntity
+                .created(URI.create("/v1/person/" + personCreated.getId()))
+                .body(personCreated);
     }
 
     @PutMapping(
@@ -46,8 +51,8 @@ public class PersonController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public PersonDTO update(@RequestBody PersonDTO person) {
-        return service.update(person);
+    public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO person) {
+        return ResponseEntity.ok(service.update(person));
     }
 
     @DeleteMapping(
