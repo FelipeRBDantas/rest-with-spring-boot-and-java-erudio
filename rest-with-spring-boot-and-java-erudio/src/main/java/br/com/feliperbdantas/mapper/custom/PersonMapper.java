@@ -54,6 +54,25 @@ public class PersonMapper {
                 .build();
     }
 
+    public Person updateEntityFromDTO(PersonDTO personDTO, Person person) {
+        return PersonBuilder.from(person)
+                .firstName(personDTO.getFirstName())
+                .lastName(personDTO.getLastName())
+                .address(personDTO.getAddress())
+                .gender(personDTO.getGender())
+                .build();
+    }
+
+    public Person updateEntityFromDTOV2(PersonDTOV2 personDTO, Person person) {
+        return PersonBuilderV2.from(person)
+                .firstName(personDTO.getFirstName())
+                .lastName(personDTO.getLastName())
+                /* .birthDay(new Date()) */
+                .address(personDTO.getAddress())
+                .gender(personDTO.getGender())
+                .build();
+    }
+
     public Set<PersonDTO> convertEntitiesToDTOs(List<Person> persons) {
         return persons.stream()
                 .map(this::convertEntityToDTO)

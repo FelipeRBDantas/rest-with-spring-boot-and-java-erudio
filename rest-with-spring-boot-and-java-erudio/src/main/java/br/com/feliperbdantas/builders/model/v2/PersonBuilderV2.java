@@ -1,16 +1,21 @@
 package br.com.feliperbdantas.builders.model.v2;
 
+import br.com.feliperbdantas.builders.model.v1.PersonBuilder;
 import br.com.feliperbdantas.model.Person;
 
 public class PersonBuilderV2 {
     private final Person person;
 
-    private PersonBuilderV2() {
-        this.person = new Person();
+    private PersonBuilderV2(Person person) {
+        this.person = (person != null) ? person : new Person();
     }
 
     public static PersonBuilderV2 create() {
-        return new PersonBuilderV2();
+        return new PersonBuilderV2(null);
+    }
+
+    public static PersonBuilderV2 from(Person existingPerson) {
+        return new PersonBuilderV2(existingPerson);
     }
 
     public PersonBuilderV2 id(Long id) {

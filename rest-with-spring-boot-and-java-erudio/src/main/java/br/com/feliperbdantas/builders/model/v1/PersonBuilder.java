@@ -5,12 +5,16 @@ import br.com.feliperbdantas.model.Person;
 public class PersonBuilder {
     private final Person person;
 
-    private PersonBuilder() {
-        this.person = new Person();
+    private PersonBuilder(Person person) {
+        this.person = (person != null) ? person : new Person();
     }
 
     public static PersonBuilder create() {
-        return new PersonBuilder();
+        return new PersonBuilder(null);
+    }
+
+    public static PersonBuilder from(Person existingPerson) {
+        return new PersonBuilder(existingPerson);
     }
 
     public PersonBuilder id(Long id) {

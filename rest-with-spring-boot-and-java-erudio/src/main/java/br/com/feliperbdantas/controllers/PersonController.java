@@ -17,7 +17,8 @@ public class PersonController {
     private PersonServices service;
 
     @GetMapping(
-            name = "/v1",
+            name = "/person/v1/findAll",
+            value = "/v1",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public List<PersonDTO> findAll() {
@@ -25,8 +26,8 @@ public class PersonController {
     }
 
     @GetMapping(
-            name = "/v1",
-            value = "/{id}",
+            name = "/person/v1/findById",
+            value = "v1/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public PersonDTO findById(@PathVariable("id") Long id) {
@@ -34,7 +35,8 @@ public class PersonController {
     }
 
     @PostMapping(
-            name = "/v1",
+            name = "/person/v1/create",
+            value = "/v1",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -42,16 +44,18 @@ public class PersonController {
         return service.create(person);
     }
     @PostMapping(
-            name = "/v2",
+            name = "/person/v2/create",
+            value = "/v2",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public PersonDTOV2 create(@RequestBody PersonDTOV2 person) {
-        return service.create(person);
+    public PersonDTOV2 createV2(@RequestBody PersonDTOV2 person) {
+        return service.createV2(person);
     }
 
     @PutMapping(
-            name = "/v1",
+            name = "/person/v1/update",
+            value = "/v1",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -60,8 +64,8 @@ public class PersonController {
     }
 
     @DeleteMapping(
-            name = "/v1",
-            value = "/{id}"
+            name = "/person/v1/delete",
+            value = "/v1/{id}"
     )
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         service.delete(id);

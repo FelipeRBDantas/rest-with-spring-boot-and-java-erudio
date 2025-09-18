@@ -5,6 +5,8 @@ import br.com.feliperbdantas.data.dto.v2.PersonDTOV2;
 import br.com.feliperbdantas.exception.ResourceNotFoundException;
 import static br.com.feliperbdantas.mapper.ObjectMapper.parseObject;
 import static br.com.feliperbdantas.mapper.ObjectMapper.parseListObjects;
+
+import br.com.feliperbdantas.mapper.custom.PersonMapper;
 import br.com.feliperbdantas.model.Person;
 import br.com.feliperbdantas.repository.PersonRepository;
 import org.slf4j.Logger;
@@ -21,6 +23,9 @@ public class PersonServices {
 
     @Autowired
     PersonRepository repository;
+
+    @Autowired
+    PersonMapper converter;
 
     public List<PersonDTO> findAll() {
         logger.info("Finding all People.");
@@ -45,12 +50,12 @@ public class PersonServices {
         return parseObject(repository.save(entity), PersonDTO.class);
     }
 
-    public PersonDTOV2 create(PersonDTOV2 person) {
-        logger.info("Creating one Person.");
+    public PersonDTOV2 createV2(PersonDTOV2 person) {
+        logger.info("Creating one Person V2.");
 
         var entity = parseObject(person, Person.class);
 
-        return parseObject(repository.save(entity), PersonDTOV2.class);
+        return converter.convertEntityToDTOV2(repository.save(entity));
     }
 
     public PersonDTO update(PersonDTO person) {
@@ -59,9 +64,11 @@ public class PersonServices {
         Person entity = repository.findById(person.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No Records found for this ID."));
 
-        BeanUtils.copyProperties(person, entity, "id");
+        /* BeanUtils.copyProperties(person, entity, "id"); */
 
-        return parseObject(repository.save(entity), PersonDTO.class);
+        var entityFromDTO = converter.updateEntityFromDTO(person, entity);
+
+        return parseObject(repository.save(entityFromDTO), PersonDTO.class);
     }
 
     public void delete(Long id) {
