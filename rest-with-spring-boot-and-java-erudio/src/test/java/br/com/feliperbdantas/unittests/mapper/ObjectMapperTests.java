@@ -1,10 +1,10 @@
 package br.com.feliperbdantas.unittests.mapper;
-import static br.com.feliperbdantas.mapper.ObjectMapper.parseListObjects;
-import static br.com.feliperbdantas.mapper.ObjectMapper.parseObject;
+import static br.com.feliperbdantas.mappers.ObjectMapper.parseListObjects;
+import static br.com.feliperbdantas.mappers.ObjectMapper.parseObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
-import br.com.feliperbdantas.model.Person;
+import br.com.feliperbdantas.models.Person;
 import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

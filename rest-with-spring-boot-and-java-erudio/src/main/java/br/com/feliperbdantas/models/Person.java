@@ -1,4 +1,4 @@
-package br.com.feliperbdantas.model;
+package br.com.feliperbdantas.models;
 
 import jakarta.persistence.*;
 

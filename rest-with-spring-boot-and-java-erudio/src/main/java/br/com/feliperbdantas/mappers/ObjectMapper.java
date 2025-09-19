@@ -1,4 +1,4 @@
-package br.com.feliperbdantas.mapper;
+package br.com.feliperbdantas.mappers;
 
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;

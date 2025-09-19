@@ -1,7 +1,7 @@
 package br.com.feliperbdantas.unittests.mapper.mocks;
 
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
-import br.com.feliperbdantas.model.Person;
+import br.com.feliperbdantas.models.Person;
 
 import java.util.ArrayList;
 import java.util.List;

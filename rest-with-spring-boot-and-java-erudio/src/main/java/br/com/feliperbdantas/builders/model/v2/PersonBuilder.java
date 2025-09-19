@@ -1,6 +1,6 @@
 package br.com.feliperbdantas.builders.model.v2;
 
-import br.com.feliperbdantas.model.Person;
+import br.com.feliperbdantas.models.Person;
 
 public class PersonBuilder {
     private final Person person;

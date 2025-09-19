@@ -1,9 +1,9 @@
-package br.com.feliperbdantas.mapper.custom.v2;
+package br.com.feliperbdantas.mappers.custom.v2;
 
 import br.com.feliperbdantas.builders.dto.v2.PersonDTOBuilder;
 import br.com.feliperbdantas.builders.model.v2.PersonBuilder;
 import br.com.feliperbdantas.data.dto.v2.PersonDTO;
-import br.com.feliperbdantas.model.Person;
+import br.com.feliperbdantas.models.Person;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

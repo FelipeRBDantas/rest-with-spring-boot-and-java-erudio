@@ -95,3 +95,76 @@ Com o Content Negotiation, a aplicação se encontra orientada a Server-driven e
 ### Documentation
 
 http://localhost:8080/swagger-ui.html
+
+### ACID
+
+O padrão ACID é um conjunto de propriedades fundamentais que garantem confiabilidade e consistência em sistemas de banco de dados transacionais. É a base para o design de transações em qualquer aplicação corporativa. Vamos destrinchar cada letra com visão prática e corporativa.
+
+1️⃣ A → Atomicidade (Atomicity)
+
+Definição: Uma transação é indivisível; ou tudo ocorre, ou nada ocorre.
+
+Exemplo: Transferência bancária:
+
+Débito de uma conta e crédito em outra devem acontecer juntos.
+
+Se uma falhar, a transação inteira é desfeita (rollback).
+
+Objetivo corporativo: Evitar dados parciais que causem inconsistência ou prejuízo.
+
+2️⃣ C → Consistência (Consistency)
+
+Definição: Após a transação, o banco de dados deve permanecer em um estado consistente, respeitando todas as regras de negócio, restrições e integridade referencial.
+
+Exemplo:
+
+Se o saldo de contas não pode ser negativo, a transação deve garantir essa regra.
+
+Qualquer violação resulta em rollback.
+
+Objetivo corporativo: Garantir que regras de negócio nunca sejam quebradas por falhas de transação.
+
+3️⃣ I → Isolamento (Isolation)
+
+Definição: Cada transação deve ser independente das demais que ocorrem simultaneamente.
+
+Fenômenos que podem ocorrer sem isolamento:
+
+Dirty reads: ler dados não commitados.
+
+Non-repeatable reads: ler dados diferentes na mesma transação.
+
+Phantom reads: linhas adicionais aparecem em consultas repetidas.
+
+Objetivo corporativo: Evitar inconsistências de dados em sistemas concorrentes.
+
+4️⃣ D → Durabilidade (Durability)
+
+Definição: Uma vez que a transação é confirmada (commit), suas alterações são permanentes, mesmo em caso de falha de sistema ou queda de energia.
+
+Exemplo:
+
+Um pagamento confirmado não pode ser perdido mesmo que o servidor caia imediatamente depois.
+
+Objetivo corporativo: Garantir confiabilidade absoluta e confiança nos dados.
+
+<br />
+
+| Propriedade  | Objetivo Corporativo                      |
+| ------------ | ----------------------------------------- |
+| Atomicidade  | Evitar dados parciais ou inconsistentes   |
+| Consistência | Garantir regras de negócio sempre válidas |
+| Isolamento   | Evitar efeitos de concorrência            |
+| Durabilidade | Garantir que dados commitados persistam   |
+
+<br />
+
+#### 🔑 Insights corporativos no uso do ACID:
+
+Leitura pura → readOnly + SUPPORTS para performance.
+
+Alteração crítica → REQUIRED + REPEATABLE_READ para consistência.
+
+CRUD simples → READ_COMMITTED suficiente.
+
+Alta concorrência e integridade máxima → considerar SERIALIZABLE, mas só quando necessário, devido ao impacto de performance.

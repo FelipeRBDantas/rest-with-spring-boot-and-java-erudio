@@ -1,7 +1,7 @@
 package br.com.feliperbdantas.controllers.v2;
 
 import br.com.feliperbdantas.data.dto.v2.PersonDTO;
-import br.com.feliperbdantas.services.v2.PersonService;
+import br.com.feliperbdantas.services.v2.impl.PersonServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/v2/person")
 public class PersonController {
     @Autowired
-    private PersonService service;
+    private PersonServiceImpl service;
 
     @GetMapping(
             name = "/v2/person/findAll",
