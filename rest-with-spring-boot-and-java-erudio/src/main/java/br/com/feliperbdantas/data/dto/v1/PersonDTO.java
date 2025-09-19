@@ -1,7 +1,9 @@
 package br.com.feliperbdantas.data.dto.v1;
 
+import br.com.feliperbdantas.serializer.GenderSerializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.Objects;
 
@@ -25,6 +27,7 @@ public class PersonDTO {
 
     private String address;
 
+    @JsonSerialize(using = GenderSerializer.class)
     private String gender;
 
     public PersonDTO() {}
