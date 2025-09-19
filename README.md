@@ -4,19 +4,11 @@ Em desenvolvimento!
 
 # Rest With Spring Boot Erudio
 
-Esse projeto é uma API Restful orientado a testes, com CI/CD, monitoramento, documentação, Content Negotiation, prática de versionamento de API, versionamento de base de dados, banco de dados relacional MySQL, configuração de CORS e segurança.
+Esse projeto é uma API Restful orientado a testes, com CI/CD, conteinerização e orquestração de containers, monitoramento com logs e Spring Actuator, documentação, content negotiation, HATEOAS, serialização de JSON, prática de versionamento de API, versionamento de base de dados, banco de dados relacional MySQL, configuração de CORS, segurança, relatórios, envio de e-mail, design patterns e padrões arquiteturais.
 
 ## Tools
 
-:coffee: Java 8
-
-:hammer_and_wrench: Intellij IDEA
-
-:hammer_and_wrench: TDD
-
-:hammer_and_wrench: JUnit5
-
-:hammer_and_wrench: Mockito
+:coffee: Java 21
 
 :hammer_and_wrench: Spring Boot
 
@@ -24,13 +16,65 @@ Esse projeto é uma API Restful orientado a testes, com CI/CD, monitoramento, do
 
 :hammer_and_wrench: Spring Security
 
+:hammer_and_wrench: Spring Mail
+
+:hammer_and_wrench: Spring Actuator
+
+:hammer_and_wrench: Intellij IDEA
+
+:hammer_and_wrench: TDD
+
+:hammer_and_wrench: BDD
+
+:hammer_and_wrench: JUnit5
+
+:hammer_and_wrench: Mockito
+
+:hammer_and_wrench: AssertJ
+
+:hammer_and_wrench: REST Assured
+
+:hammer_and_wrench: TestContainers
+
+:hammer_and_wrench: Mockito
+
 :hammer_and_wrench: JWT
 
-:hammer_and_wrench: Swagger
+:hammer_and_wrench: Swagger (Open API)
 
 :hammer_and_wrench: MySQL
 
+:hammer_and_wrench: JPA / Hibernate
+
 :hammer_and_wrench: Flyway
+
+:hammer_and_wrench: Jasper Reports
+
+:hammer_and_wrench: Lombok
+
+:hammer_and_wrench: JSON Serialization
+
+:hammer_and_wrench: Logs com SLF4j
+
+:hammer_and_wrench: Content Negotiation
+
+:hammer_and_wrench: HATEOAS com HAL
+
+:hammer_and_wrench: Docker / Docker Compose
+
+:hammer_and_wrench: Kubernetes (K8s)
+
+:hammer_and_wrench: Design Patterns
+
+:hammer_and_wrench: Padrões Arquiteturais / Enterprise
+
+:hammer_and_wrench: Deploy na GCP com Google Cloud Run, Google Cloud SQL, GKE e Artifact Registry
+
+:hammer_and_wrench: Continuous Deployment na GCP com GitHub Actions, Docker e Google Kubernetes Engine (GKE)
+
+:hammer_and_wrench: Deploy na AWS utilizando Amazon ECS, Amazon RDS, Amazon ECR e IAM
+
+:hammer_and_wrench: Continuous Deployment na AWS com GitHub Actions, Docker, Amazon ECR e Amazon ECS
 
 ## Features
 
