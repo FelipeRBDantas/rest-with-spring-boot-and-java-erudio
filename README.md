@@ -34,12 +34,12 @@ Esse projeto é uma API Restful orientado a testes, com Ci/CD, monitoramento, do
 
 ## Features
 
-### Category
+### Person
 
 - [X] Save
 - [X] Update
 - [X] Delete
-- [X] FindAllByProperties
+- [X] FindAll
 - [X] FindById
 
 ## Run Migrate Flyway
