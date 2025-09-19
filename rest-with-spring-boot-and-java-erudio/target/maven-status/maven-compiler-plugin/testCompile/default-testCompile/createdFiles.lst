@@ -1,1 +1,3 @@
+br\com\feliperbdantas\unittests\mapper\mocks\MockPerson.class
 br\com\feliperbdantas\StartupTests.class
+br\com\feliperbdantas\unittests\mapper\ObjectMapperTests.class

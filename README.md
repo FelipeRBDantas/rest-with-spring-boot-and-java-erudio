@@ -4,7 +4,7 @@ Em desenvolvimento!
 
 # Rest With Spring Boot Erudio
 
-Esse projeto é uma API Restful orientado a testes, com Ci/CD, monitoramento, documentação, Content Negotiation, prática de versionamento de API, versionamento de base de dados, banco de dados relacional MySQL, configuração de CORS e segurança.
+Esse projeto é uma API Restful orientado a testes, com CI/CD, monitoramento, documentação, Content Negotiation, prática de versionamento de API, versionamento de base de dados, banco de dados relacional MySQL, configuração de CORS e segurança.
 
 ## Tools
 
