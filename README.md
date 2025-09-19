@@ -2,7 +2,7 @@
 
 > **Status**: 🚧 Em desenvolvimento
 
-Este projeto é uma **API RESTful** orientada a testes, com pipeline de **CI/CD**, conteinerização e orquestração de containers, monitoramento com logs e **Spring Actuator**, documentação, content negotiation, **HATEOAS**, serialização JSON, versionamento de API e de base de dados, uso de **MySQL**, configuração de **CORS**, segurança, relatórios, envio de e-mails, aplicação de **design patterns** e padrões arquiteturais.
+Este projeto é uma **API RESTful** orientada a testes, com pipeline de **CI/CD**, conteinerização e orquestração de containers, monitoramento com logs e **Spring Actuator**, documentação, content negotiation, **HATEOAS**, serialização JSON, versionamento de API e de base de dados, uso de **MySQL**, migração e conversão de banco de dados, configuração de **CORS**, segurança, relatórios, envio de e-mails, aplicação de **design patterns** e padrões arquiteturais.
 
 ---
 
@@ -12,7 +12,7 @@ Este projeto é uma **API RESTful** orientada a testes, com pipeline de **CI/CD*
 - 🧩 Spring Boot • Spring Data (JPA/Hibernate) • Spring Security • Spring Mail • Spring Actuator
 - 🧪 TDD • BDD • JUnit 5 • Mockito • AssertJ • REST Assured • TestContainers
 - 🔑 JWT • Swagger (OpenAPI)
-- 🗄️ MySQL • Flyway • Jasper Reports
+- 🗄️ MySQL • Flyway • Jasper Reports • SQLines
 - ⚙️ Lombok • JSON Serialization • SLF4j Logs • Content Negotiation • HATEOAS (HAL)
 - 🐳 Docker / Docker Compose • Kubernetes (K8s)
 - 🏗️ Design Patterns • Padrões Arquiteturais / Enterprise
