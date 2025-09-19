@@ -159,7 +159,55 @@ Objetivo corporativo: Garantir confiabilidade absoluta e confiança nos dados.
 
 <br />
 
-#### 🔑 Insights corporativos no uso do ACID:
+#### Propagation (Spring/Hibernate):
+
+| Tipo            | Comportamento resumido                                                           |
+| --------------- | -------------------------------------------------------------------------------- |
+| `REQUIRED`      | Usa a transação existente ou cria uma nova se não houver.                        |
+| `REQUIRES_NEW`  | Sempre cria uma nova transação, suspendendo a existente.                         |
+| `SUPPORTS`      | Executa dentro da transação existente, se houver; caso contrário, sem transação. |
+| `MANDATORY`     | Exige uma transação existente, caso contrário lança exceção.                     |
+| `NOT_SUPPORTED` | Executa fora de qualquer transação, suspendendo a existente.                     |
+| `NEVER`         | Nunca deve haver transação; se houver, lança exceção.                            |
+| `NESTED`        | Cria uma transação aninhada dentro da existente (usando savepoints).             |
+
+<br />
+
+#### Níveis de isolamento (Spring/Hibernate):
+
+| Nível                 | Comportamento resumido                                                             |
+| --------------------- | ---------------------------------------------------------------------------------- |
+| **DEFAULT**           | Usa o padrão do banco (geralmente READ COMMITTED).                                 |
+| **READ\_UNCOMMITTED** | Permite **dirty reads**, leitura suja de dados não commitados.                     |
+| **READ\_COMMITTED**   | Evita dirty reads, mas ainda permite **non-repeatable reads**.                     |
+| **REPEATABLE\_READ**  | Evita dirty e non-repeatable reads, mas **phantom reads** ainda podem ocorrer.     |
+| **SERIALIZABLE**      | Isolamento máximo: evita todos os fenômenos, mas reduz concorrência e performance. |
+
+<br />
+
+#### Resumo estratégico por CRUD no uso do ACID (Spring/Hibernate):
+
+| Operação | Propagation | Isolation        | readOnly | Observação corporativa                  |
+| -------- | ----------- | ---------------- | -------- | --------------------------------------- |
+| Create   | REQUIRED    | READ\_COMMITTED  | false    | Atomicidade simples, evita dirty reads. |
+| Read     | SUPPORTS    | READ\_COMMITTED  | true     | Consulta segura, performance otimizada. |
+| Update   | REQUIRED    | REPEATABLE\_READ | false    | Protege contra non-repeatable reads.    |
+| Delete   | REQUIRED    | REPEATABLE\_READ | false    | Evita inconsistências durante remoção.  |
+
+<br />
+
+#### Relação com níveis de isolamento no uso do ACID (Spring/Hibernate):
+
+| Isolation Level   | Dirty Reads Permitidos? |
+| ----------------- | ----------------------- |
+| READ\_UNCOMMITTED | ✅ Permitido             |
+| READ\_COMMITTED   | ❌ Evitado               |
+| REPEATABLE\_READ  | ❌ Evitado               |
+| SERIALIZABLE      | ❌ Evitado               |
+
+<br />
+
+#### 🔑 Insights corporativos no uso do ACID (Spring/Hibernate):
 
 Leitura pura → readOnly + SUPPORTS para performance.
 
