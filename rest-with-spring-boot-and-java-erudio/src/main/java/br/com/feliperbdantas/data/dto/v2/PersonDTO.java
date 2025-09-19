@@ -1,16 +1,35 @@
 package br.com.feliperbdantas.data.dto.v2;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.util.Date;
 import java.util.Objects;
 
+@JsonPropertyOrder({
+        "id",
+        "first_name",
+        "last_name",
+        "address",
+        "gender",
+        "birth_day",
+})
 public class PersonDTO {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+
+    @JsonProperty("first_name")
     private String firstName;
+
+    @JsonProperty("last_name")
     private String lastName;
+
     private String address;
+
     private String gender;
+
+    @JsonProperty("birth_day")
     private Date birthDay;
 
     public PersonDTO() {}
