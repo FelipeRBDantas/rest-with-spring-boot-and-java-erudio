@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +29,11 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     PersonMapper converter;
 
+    @Transactional(
+            readOnly = true,
+            propagation = Propagation.SUPPORTS,
+            isolation = Isolation.READ_COMMITTED
+    )
     @Override
     public List<PersonDTO> findAll() {
         logger.info("[V2] Finding all People.");
@@ -33,6 +41,11 @@ public class PersonServiceImpl implements PersonService {
         return parseListObjects(repository.findAll(), PersonDTO.class);
     }
 
+    @Transactional(
+            readOnly = true,
+            propagation = Propagation.SUPPORTS,
+            isolation = Isolation.READ_COMMITTED
+    )
     @Override
     public PersonDTO findById(Long id) {
         logger.info("[V2] Finding one Person.");
@@ -43,6 +56,10 @@ public class PersonServiceImpl implements PersonService {
         return parseObject(entity, PersonDTO.class);
     }
 
+    @Transactional(
+            propagation = Propagation.REQUIRED,
+            isolation = Isolation.READ_COMMITTED
+    )
     @Override
     public PersonDTO create(PersonDTO person) {
         logger.info("[V2] Creating one Person V2.");
@@ -52,6 +69,10 @@ public class PersonServiceImpl implements PersonService {
         return converter.convertEntityToDTO(repository.save(entity));
     }
 
+    @Transactional(
+            propagation = Propagation.REQUIRED,
+            isolation = Isolation.REPEATABLE_READ
+    )
     @Override
     public PersonDTO update(PersonDTO person) {
         logger.info("[V2] Updating one Person.");
@@ -66,6 +87,10 @@ public class PersonServiceImpl implements PersonService {
         return parseObject(repository.save(entityFromDTO), PersonDTO.class);
     }
 
+    @Transactional(
+            propagation = Propagation.REQUIRED,
+            isolation = Isolation.REPEATABLE_READ
+    )
     @Override
     public void delete(Long id) {
         logger.info("[V2] Deleting one Person.");
