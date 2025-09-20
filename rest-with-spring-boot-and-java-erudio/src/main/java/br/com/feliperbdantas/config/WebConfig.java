@@ -7,22 +7,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    // By Query Parameter
     @Override
     public void configureContentNegotiation( ContentNegotiationConfigurer contentNegotiationConfigurer ) {
-        contentNegotiationConfigurer
+        // By Query Parameter
+        /* contentNegotiationConfigurer
                 .favorParameter(true)
                 .parameterName("mediaType")
                 .ignoreAcceptHeader(true)
                 .useRegisteredExtensionsOnly(false)
                 .defaultContentType(MediaType.APPLICATION_JSON)
                 .mediaType("json", MediaType.APPLICATION_JSON)
-                .mediaType("xml", MediaType.APPLICATION_XML);
-    }
+                .mediaType("xml", MediaType.APPLICATION_XML); */
 
-    // By Accept parameter
-    /* @Override
-    public void configureContentNegotiation( ContentNegotiationConfigurer contentNegotiationConfigurer ) {
+        // By Header Accept parameter
         contentNegotiationConfigurer
                 .favorParameter(false)
                 .ignoreAcceptHeader(false)
@@ -30,5 +27,5 @@ public class WebConfig implements WebMvcConfigurer {
                 .defaultContentType(MediaType.APPLICATION_JSON)
                 .mediaType("json", MediaType.APPLICATION_JSON)
                 .mediaType("xml", MediaType.APPLICATION_XML);
-    } */
+    }
 }
