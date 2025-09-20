@@ -18,7 +18,10 @@ public class PersonController {
 
     @GetMapping(
             name = "/v1/person/findAll",
-            produces = MediaType.APPLICATION_JSON_VALUE
+            produces = {
+                    MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE
+            }
     )
     public ResponseEntity<List<PersonDTO>> findAll() {
         return ResponseEntity.ok(service.findAll());
@@ -27,7 +30,10 @@ public class PersonController {
     @GetMapping(
             name = "/v1/person/findById",
             value = "/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE
+            produces = {
+                    MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE
+            }
     )
     public ResponseEntity<PersonDTO> findById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(service.findById(id));
@@ -35,8 +41,14 @@ public class PersonController {
 
     @PostMapping(
             name = "/v1/person/create",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
+            consumes = {
+                    MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE
+            },
+            produces = {
+                    MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE
+            }
     )
     public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO person) {
         PersonDTO personCreated = service.create(person);
@@ -48,8 +60,14 @@ public class PersonController {
 
     @PutMapping(
             name = "/v1/person/update",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
+            consumes = {
+                    MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE
+            },
+            produces = {
+                    MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE
+            }
     )
     public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO person) {
         return ResponseEntity.ok(service.update(person));
