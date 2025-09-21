@@ -79,6 +79,38 @@ class PersonControllerTest {
                         )
         );
 
+        assertTrue(
+                model.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("findAll")
+                                        && link.getHref().endsWith("/v1/person")
+                        )
+        );
+
+        assertTrue(
+                model.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("create")
+                                        && link.getHref().endsWith("/v1/person")
+                        )
+        );
+
+        assertTrue(
+                model.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("update")
+                                        && link.getHref().endsWith("/v1/person")
+                        )
+        );
+
+        assertTrue(
+                model.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("delete")
+                                        && link.getHref().endsWith("/v1/person/1")
+                        )
+        );
+
         assertEquals(1, model.getContent().getId());
         assertEquals("First Name Test1", model.getContent().getFirstName());
         assertEquals("Last Name Test1", model.getContent().getLastName());

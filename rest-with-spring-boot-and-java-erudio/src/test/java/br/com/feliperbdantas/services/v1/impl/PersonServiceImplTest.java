@@ -4,6 +4,7 @@ import br.com.feliperbdantas.models.Person;
 import br.com.feliperbdantas.repository.PersonRepository;
 import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
@@ -45,7 +46,11 @@ class PersonServiceImplTest {
         var result = service.findById(1L);
 
         assertNotNull(result);
-        assertNotNull(result.getId());
+        assertEquals(1, result.getId());
+        assertEquals("First Name Test1", result.getFirstName());
+        assertEquals("Last Name Test1", result.getLastName());
+        assertEquals("Female", result.getGender());
+        assertEquals("Address Test1", result.getAddress());
     }
 
     @Test
