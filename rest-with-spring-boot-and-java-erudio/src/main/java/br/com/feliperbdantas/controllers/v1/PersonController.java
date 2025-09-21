@@ -2,9 +2,8 @@ package br.com.feliperbdantas.controllers.v1;
 
 import br.com.feliperbdantas.assemblers.PersonModelAssembler;
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
-import br.com.feliperbdantas.services.v1.impl.PersonServiceImpl;
+import br.com.feliperbdantas.services.v1.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ import java.util.List;
 @RequestMapping("/v1/person")
 public class PersonController {
     @Autowired
-    private PersonServiceImpl service;
+    private PersonService service;
 
     @Autowired
     private PersonModelAssembler assembler;
