@@ -20,7 +20,8 @@ public class PersonController {
             name = "/v1/person/findAll",
             produces = {
                     MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE
+                    MediaType.APPLICATION_XML_VALUE,
+                    MediaType.APPLICATION_YAML_VALUE
             }
     )
     public ResponseEntity<List<PersonDTO>> findAll() {
@@ -32,7 +33,8 @@ public class PersonController {
             value = "/{id}",
             produces = {
                     MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE
+                    MediaType.APPLICATION_XML_VALUE,
+                    MediaType.APPLICATION_YAML_VALUE
             }
     )
     public ResponseEntity<PersonDTO> findById(@PathVariable("id") Long id) {
@@ -43,11 +45,13 @@ public class PersonController {
             name = "/v1/person/create",
             consumes = {
                     MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE
+                    MediaType.APPLICATION_XML_VALUE,
+                    MediaType.APPLICATION_YAML_VALUE
             },
             produces = {
                     MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE
+                    MediaType.APPLICATION_XML_VALUE,
+                    MediaType.APPLICATION_YAML_VALUE
             }
     )
     public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO person) {
@@ -62,11 +66,13 @@ public class PersonController {
             name = "/v1/person/update",
             consumes = {
                     MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE
+                    MediaType.APPLICATION_XML_VALUE,
+                    MediaType.APPLICATION_YAML_VALUE
             },
             produces = {
                     MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE
+                    MediaType.APPLICATION_XML_VALUE,
+                    MediaType.APPLICATION_YAML_VALUE
             }
     )
     public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO person) {
