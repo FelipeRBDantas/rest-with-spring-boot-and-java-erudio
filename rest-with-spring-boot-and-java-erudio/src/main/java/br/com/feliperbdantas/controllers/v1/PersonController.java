@@ -1,8 +1,11 @@
 package br.com.feliperbdantas.controllers.v1;
 
+import br.com.feliperbdantas.assemblers.PersonModelAssembler;
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
 import br.com.feliperbdantas.services.v1.impl.PersonServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,9 @@ public class PersonController {
     @Autowired
     private PersonServiceImpl service;
 
+    @Autowired
+    private PersonModelAssembler assembler;
+
     @GetMapping(
             name = "/v1/person/findAll",
             produces = {
@@ -24,8 +30,8 @@ public class PersonController {
                     MediaType.APPLICATION_YAML_VALUE
             }
     )
-    public ResponseEntity<List<PersonDTO>> findAll() {
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<List<EntityModel<PersonDTO>>> findAll() {
+        return ResponseEntity.ok(assembler.toFlatList(service.findAll()));
     }
 
     @GetMapping(
@@ -37,8 +43,8 @@ public class PersonController {
                     MediaType.APPLICATION_YAML_VALUE
             }
     )
-    public ResponseEntity<PersonDTO> findById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(service.findById(id));
+    public ResponseEntity<EntityModel<PersonDTO>> findById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(assembler.toModel(service.findById(id)));
     }
 
     @PostMapping(
