@@ -61,7 +61,9 @@ public class PersonController {
             }
     )
     public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO person) {
-        PersonDTO personCreated = service.create(person);
+        PersonDTO personCreated = assembler
+                .toModel(service.create(person))
+                .getContent();
 
         return ResponseEntity
                 .created(URI.create("/v1/person/" + personCreated.getId()))
@@ -81,8 +83,8 @@ public class PersonController {
                     MediaType.APPLICATION_YAML_VALUE
             }
     )
-    public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO person) {
-        return ResponseEntity.ok(service.update(person));
+    public ResponseEntity<EntityModel<PersonDTO>> update(@RequestBody PersonDTO person) {
+        return ResponseEntity.ok(assembler.toModel(service.update(person)));
     }
 
     @DeleteMapping(
