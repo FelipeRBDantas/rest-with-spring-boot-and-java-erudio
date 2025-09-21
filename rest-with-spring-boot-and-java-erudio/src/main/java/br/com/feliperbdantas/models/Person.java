@@ -2,11 +2,12 @@ package br.com.feliperbdantas.models;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "person")
-public class Person {
+public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

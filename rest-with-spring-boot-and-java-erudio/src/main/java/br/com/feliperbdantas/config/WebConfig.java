@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Override
-    public void configureContentNegotiation( ContentNegotiationConfigurer contentNegotiationConfigurer ) {
+    public void configureContentNegotiation(ContentNegotiationConfigurer contentNegotiationConfigurer) {
         // By Query Parameter
         /* contentNegotiationConfigurer
                 .favorParameter(true)

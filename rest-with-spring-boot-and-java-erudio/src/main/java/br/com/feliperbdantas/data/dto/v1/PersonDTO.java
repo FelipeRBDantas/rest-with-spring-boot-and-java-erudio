@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @JsonPropertyOrder({
@@ -14,7 +15,7 @@ import java.util.Objects;
         "address",
         "gender",
 })
-public class PersonDTO {
+public class PersonDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
