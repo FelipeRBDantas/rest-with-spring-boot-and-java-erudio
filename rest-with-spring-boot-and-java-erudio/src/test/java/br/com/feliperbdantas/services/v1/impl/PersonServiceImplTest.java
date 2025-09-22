@@ -97,5 +97,11 @@ class PersonServiceImplTest {
 
     @Test
     void delete() {
+        Person person = input.mockEntity(1);
+        person.setId(1L);
+
+        when(repository.findById(1L)).thenReturn(Optional.of(person));
+
+        service.delete(1L);
     }
 }
