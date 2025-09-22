@@ -13,6 +13,8 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -42,6 +44,92 @@ class PersonControllerTest {
 
     @Test
     void findAll() {
+        List<PersonDTO> personsDTO = input.mockDTOList();
+
+        var personOne = personsDTO.get(1);
+
+        List<EntityModel<PersonDTO>> models = personsDTO.stream()
+                .map(p -> EntityModel.of(
+                        p,
+                        linkTo(methodOn(PersonController.class).findById(p.getId())).withSelfRel(),
+                        linkTo(methodOn(PersonController.class).findAll()).withRel("findAll"),
+                        linkTo(methodOn(PersonController.class).create(p)).withRel("create"),
+                        linkTo(methodOn(PersonController.class).update(p)).withRel("update"),
+                        linkTo(methodOn(PersonController.class).delete(p.getId())).withRel("delete")
+                ))
+                .toList();
+
+        when(service.findAll()).thenReturn(personsDTO);
+
+        when(assembler.toFlatList(personsDTO)).thenReturn(models);
+
+        assertNotNull(personsDTO);
+        assertEquals(14, personsDTO.size());
+
+        assertNotNull(personOne);
+        assertEquals(1, personOne.getId());
+        assertEquals("First Name Test1", personOne.getFirstName());
+        assertEquals("Last Name Test1", personOne.getLastName());
+        assertEquals("Female", personOne.getGender());
+        assertEquals("Address Test1", personOne.getAddress());
+
+        ResponseEntity<List<EntityModel<PersonDTO>>> response = controller.findAll();
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(14, response.getBody().size());
+
+        EntityModel<PersonDTO> modelOne = response.getBody().get(1);
+
+        assertNotNull(modelOne);
+        assertNotNull(modelOne.getContent());
+        assertNotNull(modelOne.getLinks());
+
+        assertTrue(
+                modelOne.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("self")
+                                        && link.getHref().endsWith("/v1/person/1")
+                        )
+        );
+
+        assertTrue(
+                modelOne.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("findAll")
+                                        && link.getHref().endsWith("/v1/person")
+                        )
+        );
+
+        assertTrue(
+                modelOne.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("create")
+                                        && link.getHref().endsWith("/v1/person")
+                        )
+        );
+
+        assertTrue(
+                modelOne.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("update")
+                                        && link.getHref().endsWith("/v1/person")
+                        )
+        );
+
+        assertTrue(
+                modelOne.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("delete")
+                                        && link.getHref().endsWith("/v1/person/1")
+                        )
+        );
+
+        assertEquals(1, modelOne.getContent().getId());
+        assertEquals("First Name Test1", modelOne.getContent().getFirstName());
+        assertEquals("Last Name Test1", modelOne.getContent().getLastName());
+        assertEquals("Female", modelOne.getContent().getGender());
+        assertEquals("Address Test1", modelOne.getContent().getAddress());
     }
 
     @Test

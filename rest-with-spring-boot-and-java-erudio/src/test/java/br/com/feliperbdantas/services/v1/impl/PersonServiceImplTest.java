@@ -16,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.List;
 import java.util.Optional;
 
 class PersonServiceImplTest {
@@ -39,6 +40,32 @@ class PersonServiceImplTest {
 
     @Test
     void findAll() {
+        List<Person> personsEntity = input.mockEntityList();
+
+        when(repository.findAll()).thenReturn(personsEntity);
+
+        List<PersonDTO> personsDTO = service.findAll();
+
+        assertNotNull(personsDTO);
+        assertEquals(14, personsDTO.size());
+
+        var personOne = personsDTO.get(1);
+
+        assertNotNull(personOne);
+        assertEquals(1, personOne.getId());
+        assertEquals("First Name Test1", personOne.getFirstName());
+        assertEquals("Last Name Test1", personOne.getLastName());
+        assertEquals("Female", personOne.getGender());
+        assertEquals("Address Test1", personOne.getAddress());
+
+        var personFour = personsDTO.get(4);
+
+        assertNotNull(personFour);
+        assertEquals(4, personFour.getId());
+        assertEquals("First Name Test4", personFour.getFirstName());
+        assertEquals("Last Name Test4", personFour.getLastName());
+        assertEquals("Male", personFour.getGender());
+        assertEquals("Address Test4", personFour.getAddress());
     }
 
     @Test
