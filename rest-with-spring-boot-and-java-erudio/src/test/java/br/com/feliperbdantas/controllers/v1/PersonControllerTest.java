@@ -1,6 +1,6 @@
 package br.com.feliperbdantas.controllers.v1;
 
-import br.com.feliperbdantas.assemblers.PersonModelAssembler;
+import br.com.feliperbdantas.mappers.v1.assemblers.PersonModelAssembler;
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
 import br.com.feliperbdantas.services.v1.impl.PersonServiceImpl;
 import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
@@ -209,12 +209,11 @@ class PersonControllerTest {
     @Test
     void create() {
         PersonDTO dto = input.mockDTO(1);
-        PersonDTO persisted = dto;
-        persisted.setId(1L);
+        dto.setId(1L);
 
-        when(service.create(dto)).thenReturn(persisted);
+        when(service.create(dto)).thenReturn(dto);
         when(assembler.toModel(dto)).thenReturn(
-                EntityModel.of(persisted,
+                EntityModel.of(dto,
                         linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel(),
                         linkTo(methodOn(PersonController.class).findAll()).withRel("findAll"),
                         linkTo(methodOn(PersonController.class).create(dto)).withRel("create"),
@@ -286,10 +285,9 @@ class PersonControllerTest {
     @Test
     void update() {
         PersonDTO dto = input.mockDTO(1);
-        PersonDTO persisted = dto;
-        persisted.setId(1L);
+        dto.setId(1L);
 
-        when(service.update(dto)).thenReturn(persisted);
+        when(service.update(dto)).thenReturn(dto);
 
         when(assembler.toModel(dto)).thenReturn(
                 EntityModel.of(dto,

@@ -1,4 +1,4 @@
-package br.com.feliperbdantas.assemblers;
+package br.com.feliperbdantas.mappers.v1.assemblers;
 
 import br.com.feliperbdantas.controllers.v1.PersonController;
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
