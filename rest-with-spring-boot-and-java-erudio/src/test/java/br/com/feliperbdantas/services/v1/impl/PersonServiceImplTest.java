@@ -62,9 +62,10 @@ class PersonServiceImplTest {
 
         PersonDTO dto = input.mockDTO(1);
 
+        when(repository.findById(1L)).thenReturn(Optional.of(person));
         when(repository.save(person)).thenReturn(persisted);
 
-        var result = service.create(dto);
+        var result = service.update(dto);
 
         assertNotNull(result);
         assertEquals(1, result.getId());
@@ -76,6 +77,22 @@ class PersonServiceImplTest {
 
     @Test
     void update() {
+        Person person = input.mockEntity(1);
+        Person persisted = person;
+        persisted.setId(1L);
+
+        PersonDTO dto = input.mockDTO(1);
+
+        when(repository.save(person)).thenReturn(persisted);
+
+        var result = service.create(dto);
+
+        assertNotNull(result);
+        assertEquals(1, result.getId());
+        assertEquals("First Name Test1", result.getFirstName());
+        assertEquals("Last Name Test1", result.getLastName());
+        assertEquals("Female", result.getGender());
+        assertEquals("Address Test1", result.getAddress());
     }
 
     @Test
