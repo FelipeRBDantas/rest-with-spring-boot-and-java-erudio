@@ -1,6 +1,7 @@
 package br.com.feliperbdantas.services.v1.impl;
 
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
+import br.com.feliperbdantas.exception.RequiredObjectIsNullException;
 import br.com.feliperbdantas.exception.ResourceNotFoundException;
 import static br.com.feliperbdantas.mappers.ObjectMapper.parseObject;
 import static br.com.feliperbdantas.mappers.ObjectMapper.parseListObjects;
@@ -62,6 +63,8 @@ public class PersonServiceImpl implements PersonService {
     )
     @Override
     public PersonDTO create(PersonDTO person) {
+        if (person == null) throw new RequiredObjectIsNullException();
+
         logger.info("[V1] Creating one Person.");
 
         var entity = parseObject(person, Person.class);
@@ -75,6 +78,8 @@ public class PersonServiceImpl implements PersonService {
     )
     @Override
     public PersonDTO update(PersonDTO person) {
+        if (person == null) throw new RequiredObjectIsNullException();
+
         logger.info("[V1] Updating one Person.");
 
         Person entity = repository.findById(person.getId())
