@@ -40,9 +40,12 @@ class PersonServiceImplTest {
 
     @Test
     void findAll() {
-        List<Person> personsEntity = input.mockEntityList();
+        List<Person> personsMockEntity = input.mockEntityList();
+        List<PersonDTO> personsMockDTO = input.mockDTOList();
 
-        when(repository.findAll()).thenReturn(personsEntity);
+        when(repository.findAll()).thenReturn(personsMockEntity);
+        when(mapper.convertEntitiesToDTOs(personsMockEntity))
+                .thenReturn(personsMockDTO);
 
         List<PersonDTO> personsDTO = service.findAll();
 
@@ -73,7 +76,11 @@ class PersonServiceImplTest {
         Person person = input.mockEntity(1);
         person.setId(1L);
 
+        PersonDTO dto = input.mockDTO(1);
+        dto.setId(1L);
+
         when(repository.findById(1L)).thenReturn(Optional.of(person));
+        when(mapper.convertEntityToDTO(person)).thenReturn(dto);
 
         var result = service.findById(1L);
 
@@ -93,7 +100,9 @@ class PersonServiceImplTest {
 
         PersonDTO dto = input.mockDTO(1);
 
+        when(mapper.convertDTOToEntity(dto)).thenReturn(person);
         when(repository.save(person)).thenReturn(persisted);
+        when(mapper.updateDTOFromEntity(persisted, dto)).thenReturn(dto);
 
         var result = service.create(dto);
 
@@ -130,6 +139,7 @@ class PersonServiceImplTest {
         when(repository.findById(1L)).thenReturn(Optional.of(person));
         when(mapper.updateEntityFromDTO(dto, person)).thenReturn(person);
         when(repository.save(person)).thenReturn(persisted);
+        when(mapper.updateDTOFromEntity(persisted, dto)).thenReturn(dto);
 
         var result = service.update(dto);
 
