@@ -1,3 +1,5 @@
+br\com\feliperbdantas\assemblers\PersonModelAssemblerTest.class
 br\com\feliperbdantas\unittests\mapper\mocks\MockPerson.class
+br\com\feliperbdantas\controllers\v1\PersonControllerTest.class
+br\com\feliperbdantas\services\v1\impl\PersonServiceImplTest.class
 br\com\feliperbdantas\StartupTests.class
-br\com\feliperbdantas\unittests\mapper\ObjectMapperTests.class
