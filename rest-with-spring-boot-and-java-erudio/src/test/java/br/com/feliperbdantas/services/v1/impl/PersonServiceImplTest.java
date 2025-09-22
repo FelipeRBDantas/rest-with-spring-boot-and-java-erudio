@@ -1,5 +1,6 @@
 package br.com.feliperbdantas.services.v1.impl;
 
+import br.com.feliperbdantas.data.dto.v1.PersonDTO;
 import br.com.feliperbdantas.models.Person;
 import br.com.feliperbdantas.repository.PersonRepository;
 import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
@@ -55,6 +56,22 @@ class PersonServiceImplTest {
 
     @Test
     void create() {
+        Person person = input.mockEntity(1);
+        Person persisted = person;
+        persisted.setId(1L);
+
+        PersonDTO dto = input.mockDTO(1);
+
+        when(repository.save(person)).thenReturn(persisted);
+
+        var result = service.create(dto);
+
+        assertNotNull(result);
+        assertEquals(1, result.getId());
+        assertEquals("First Name Test1", result.getFirstName());
+        assertEquals("Last Name Test1", result.getLastName());
+        assertEquals("Female", result.getGender());
+        assertEquals("Address Test1", result.getAddress());
     }
 
     @Test

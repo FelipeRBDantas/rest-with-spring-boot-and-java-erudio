@@ -120,6 +120,79 @@ class PersonControllerTest {
 
     @Test
     void create() {
+        PersonDTO dto = input.mockDTO(1);
+        PersonDTO persisted = dto;
+        persisted.setId(1L);
+
+        when(service.create(dto)).thenReturn(persisted);
+        when(assembler.toModel(dto)).thenReturn(
+                EntityModel.of(persisted,
+                        linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel(),
+                        linkTo(methodOn(PersonController.class).findAll()).withRel("findAll"),
+                        linkTo(methodOn(PersonController.class).create(dto)).withRel("create"),
+                        linkTo(methodOn(PersonController.class).update(dto)).withRel("update"),
+                        linkTo(methodOn(PersonController.class).delete(dto.getId())).withRel("delete")
+                )
+        );
+
+        ResponseEntity<PersonDTO> response = controller.create(dto);
+
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(1L, response.getBody().getId());
+
+        EntityModel<PersonDTO> model = assembler.toModel(response.getBody());
+
+        assertNotNull(model);
+        assertNotNull(model.getContent());
+        assertEquals(1L, model.getContent().getId());
+        assertNotNull(model.getLinks());
+
+        assertTrue(
+                model.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("self")
+                                        && link.getHref().endsWith("/v1/person/1")
+                        )
+        );
+
+        assertTrue(
+                model.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("findAll")
+                                        && link.getHref().endsWith("/v1/person")
+                        )
+        );
+
+        assertTrue(
+                model.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("create")
+                                        && link.getHref().endsWith("/v1/person")
+                        )
+        );
+
+        assertTrue(
+                model.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("update")
+                                        && link.getHref().endsWith("/v1/person")
+                        )
+        );
+
+        assertTrue(
+                model.getLinks().stream()
+                        .anyMatch(
+                                link -> link.getRel().value().equals("delete")
+                                        && link.getHref().endsWith("/v1/person/1")
+                        )
+        );
+
+        assertEquals(1, model.getContent().getId());
+        assertEquals("First Name Test1", model.getContent().getFirstName());
+        assertEquals("Last Name Test1", model.getContent().getLastName());
+        assertEquals("Female", model.getContent().getGender());
+        assertEquals("Address Test1", model.getContent().getAddress());
     }
 
     @Test
