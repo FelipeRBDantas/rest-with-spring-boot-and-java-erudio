@@ -1,12 +1,13 @@
 package br.com.feliperbdantas.services.v1.impl;
 
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
+import br.com.feliperbdantas.exception.RequiredObjectIsNullException;
+import br.com.feliperbdantas.mappers.custom.v1.PersonMapper;
 import br.com.feliperbdantas.models.Person;
 import br.com.feliperbdantas.repository.PersonRepository;
 import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,9 @@ class PersonServiceImplTest {
 
     @Mock
     PersonRepository repository;
+
+    @Mock
+    PersonMapper mapper;
 
     @InjectMocks
     PersonServiceImpl service;
@@ -62,7 +66,42 @@ class PersonServiceImplTest {
 
         PersonDTO dto = input.mockDTO(1);
 
+        when(repository.save(person)).thenReturn(persisted);
+
+        var result = service.create(dto);
+
+        assertNotNull(result);
+        assertEquals(1, result.getId());
+        assertEquals("First Name Test1", result.getFirstName());
+        assertEquals("Last Name Test1", result.getLastName());
+        assertEquals("Female", result.getGender());
+        assertEquals("Address Test1", result.getAddress());
+    }
+
+    @Test
+    void testCreateWithNullPerson() {
+        Exception exception = assertThrows(
+                RequiredObjectIsNullException.class,
+                () -> {
+                    service.create(null);
+                });
+
+        String expectedMessage = "It is not allowed to persist a null object.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void update() {
+        Person person = input.mockEntity(1);
+        Person persisted = person;
+        persisted.setId(1L);
+
+        PersonDTO dto = input.mockDTO(1);
+
         when(repository.findById(1L)).thenReturn(Optional.of(person));
+        when(mapper.updateEntityFromDTO(dto, person)).thenReturn(person);
         when(repository.save(person)).thenReturn(persisted);
 
         var result = service.update(dto);
@@ -76,23 +115,17 @@ class PersonServiceImplTest {
     }
 
     @Test
-    void update() {
-        Person person = input.mockEntity(1);
-        Person persisted = person;
-        persisted.setId(1L);
+    void testUpdateWithNullPerson() {
+        Exception exception = assertThrows(
+                RequiredObjectIsNullException.class,
+                () -> {
+                    service.update(null);
+                });
 
-        PersonDTO dto = input.mockDTO(1);
+        String expectedMessage = "It is not allowed to persist a null object.";
+        String actualMessage = exception.getMessage();
 
-        when(repository.save(person)).thenReturn(persisted);
-
-        var result = service.create(dto);
-
-        assertNotNull(result);
-        assertEquals(1, result.getId());
-        assertEquals("First Name Test1", result.getFirstName());
-        assertEquals("Last Name Test1", result.getLastName());
-        assertEquals("Female", result.getGender());
-        assertEquals("Address Test1", result.getAddress());
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
