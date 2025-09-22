@@ -7,7 +7,7 @@ import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -103,5 +103,9 @@ class PersonServiceImplTest {
         when(repository.findById(1L)).thenReturn(Optional.of(person));
 
         service.delete(1L);
+
+        verify(repository, times(1)).findById(anyLong());
+        verify(repository, times(1)).delete(any(Person.class));
+        verifyNoMoreInteractions(repository);
     }
 }
