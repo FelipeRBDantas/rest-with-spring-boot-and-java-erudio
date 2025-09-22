@@ -1,4 +1,4 @@
-package br.com.feliperbdantas.mappers.custom.v1;
+package br.com.feliperbdantas.mappers.v1;
 
 import br.com.feliperbdantas.builders.dto.v1.PersonDTOBuilder;
 import br.com.feliperbdantas.builders.model.v1.PersonBuilder;
@@ -7,7 +7,6 @@ import br.com.feliperbdantas.models.Person;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -41,16 +40,25 @@ public class PersonMapper {
                 .gender(personDTO.getGender())
                 .build();
     }
-
-    public Set<PersonDTO> convertEntitiesToDTOs(List<Person> persons) {
-        return persons.stream()
-                .map(this::convertEntityToDTO)
-                .collect(Collectors.toUnmodifiableSet());
+    public PersonDTO updateDTOFromEntity(Person person, PersonDTO personDTO) {
+        return PersonDTOBuilder.from(personDTO)
+                .id(person.getId())
+                .firstName(person.getFirstName())
+                .lastName(person.getLastName())
+                .address(person.getAddress())
+                .gender(person.getGender())
+                .build();
     }
 
-    public Set<Person> updateEntitiesFromDTOs(List<PersonDTO> persons, List<Person> existingPersons) {
+    public List<PersonDTO> convertEntitiesToDTOs(List<Person> persons) {
+        return persons.stream()
+                .map(this::convertEntityToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<Person> updateEntitiesFromDTOs(List<PersonDTO> persons, List<Person> existingPersons) {
         return IntStream.range(0, persons.size())
                 .mapToObj(i -> updateEntityFromDTO(persons.get(i), existingPersons.get(i)))
-                .collect(Collectors.toUnmodifiableSet());
+                .collect(Collectors.toList());
     }
 }

@@ -3,10 +3,8 @@ package br.com.feliperbdantas.services.v1.impl;
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
 import br.com.feliperbdantas.exception.RequiredObjectIsNullException;
 import br.com.feliperbdantas.exception.ResourceNotFoundException;
-import static br.com.feliperbdantas.mappers.ObjectMapper.parseObject;
-import static br.com.feliperbdantas.mappers.ObjectMapper.parseListObjects;
 
-import br.com.feliperbdantas.mappers.custom.v1.PersonMapper;
+import br.com.feliperbdantas.mappers.v1.PersonMapper;
 import br.com.feliperbdantas.models.Person;
 import br.com.feliperbdantas.repository.PersonRepository;
 import br.com.feliperbdantas.services.v1.PersonService;
@@ -28,7 +26,7 @@ public class PersonServiceImpl implements PersonService {
     PersonRepository repository;
 
     @Autowired
-    PersonMapper converter;
+    PersonMapper mapper;
 
     @Transactional(
             readOnly = true,
@@ -39,7 +37,7 @@ public class PersonServiceImpl implements PersonService {
     public List<PersonDTO> findAll() {
         logger.info("[V1] Finding all People.");
 
-        return parseListObjects(repository.findAll(), PersonDTO.class);
+        return mapper.convertEntitiesToDTOs(repository.findAll());
     }
 
     @Transactional(
@@ -54,7 +52,7 @@ public class PersonServiceImpl implements PersonService {
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No Records found for this ID."));
 
-        return parseObject(entity, PersonDTO.class);
+        return mapper.convertEntityToDTO(entity);
     }
 
     @Transactional(
@@ -67,9 +65,9 @@ public class PersonServiceImpl implements PersonService {
 
         logger.info("[V1] Creating one Person.");
 
-        var entity = parseObject(person, Person.class);
+        var entityFromDTO = mapper.convertDTOToEntity(person);
 
-        return parseObject(repository.save(entity), PersonDTO.class);
+        return mapper.updateDTOFromEntity(repository.save(entityFromDTO), person);
     }
 
     @Transactional(
@@ -87,9 +85,9 @@ public class PersonServiceImpl implements PersonService {
 
         /* BeanUtils.copyProperties(person, entity, "id"); */
 
-        var entityFromDTO = converter.updateEntityFromDTO(person, entity);
+        var entityFromDTO = mapper.updateEntityFromDTO(person, entity);
 
-        return parseObject(repository.save(entityFromDTO), PersonDTO.class);
+        return mapper.updateDTOFromEntity(repository.save(entityFromDTO), person);
     }
 
     @Transactional(

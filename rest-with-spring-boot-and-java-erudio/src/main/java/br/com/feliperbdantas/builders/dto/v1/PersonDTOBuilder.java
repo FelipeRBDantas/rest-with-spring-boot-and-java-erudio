@@ -5,12 +5,16 @@ import br.com.feliperbdantas.data.dto.v1.PersonDTO;
 public class PersonDTOBuilder {
     private final PersonDTO dto;
 
-    private PersonDTOBuilder() {
-        this.dto = new PersonDTO();
+    private PersonDTOBuilder(PersonDTO dto) {
+        this.dto = (dto != null) ? dto : new PersonDTO();
     }
 
     public static PersonDTOBuilder create() {
-        return new PersonDTOBuilder();
+        return new PersonDTOBuilder(null);
+    }
+
+    public static PersonDTOBuilder from(PersonDTO existingDTO) {
+        return new PersonDTOBuilder(existingDTO);
     }
 
     public PersonDTOBuilder id(Long id) {

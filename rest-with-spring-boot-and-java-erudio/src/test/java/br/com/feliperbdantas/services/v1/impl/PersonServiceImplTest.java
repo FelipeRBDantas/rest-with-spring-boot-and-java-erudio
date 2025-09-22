@@ -2,7 +2,7 @@ package br.com.feliperbdantas.services.v1.impl;
 
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
 import br.com.feliperbdantas.exception.RequiredObjectIsNullException;
-import br.com.feliperbdantas.mappers.custom.v1.PersonMapper;
+import br.com.feliperbdantas.mappers.v1.PersonMapper;
 import br.com.feliperbdantas.models.Person;
 import br.com.feliperbdantas.repository.PersonRepository;
 import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
