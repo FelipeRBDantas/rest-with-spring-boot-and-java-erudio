@@ -2,7 +2,7 @@ package br.com.feliperbdantas.services.v1.impl;
 
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
 import br.com.feliperbdantas.exception.RequiredObjectIsNullException;
-import br.com.feliperbdantas.mappers.v1.custom.PersonMapper;
+import br.com.feliperbdantas.mappers.PersonMapper;
 import br.com.feliperbdantas.models.Person;
 import br.com.feliperbdantas.repository.PersonRepository;
 import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
@@ -44,7 +44,7 @@ class PersonServiceImplTest {
         List<PersonDTO> personsMockDTO = input.mockDTOList();
 
         when(repository.findAll()).thenReturn(personsMockEntity);
-        when(mapper.convertEntitiesToDTOs(personsMockEntity))
+        when(mapper.toDtoList(personsMockEntity))
                 .thenReturn(personsMockDTO);
 
         List<PersonDTO> personsDTO = service.findAll();
@@ -80,7 +80,7 @@ class PersonServiceImplTest {
         dto.setId(1L);
 
         when(repository.findById(1L)).thenReturn(Optional.of(person));
-        when(mapper.convertEntityToDTO(person)).thenReturn(dto);
+        when(mapper.toDto(person)).thenReturn(dto);
 
         var result = service.findById(1L);
 
@@ -100,9 +100,9 @@ class PersonServiceImplTest {
 
         PersonDTO dto = input.mockDTO(1);
 
-        when(mapper.convertDTOToEntity(dto)).thenReturn(person);
+        when(mapper.toEntity(dto)).thenReturn(person);
         when(repository.save(person)).thenReturn(persisted);
-        when(mapper.updateDTOFromEntity(persisted, dto)).thenReturn(dto);
+        when(mapper.toDto(persisted)).thenReturn(dto);
 
         var result = service.create(dto);
 
@@ -137,9 +137,9 @@ class PersonServiceImplTest {
         PersonDTO dto = input.mockDTO(1);
 
         when(repository.findById(1L)).thenReturn(Optional.of(person));
-        when(mapper.updateEntityFromDTO(dto, person)).thenReturn(person);
+        when(mapper.toEntity(dto)).thenReturn(person);
         when(repository.save(person)).thenReturn(persisted);
-        when(mapper.updateDTOFromEntity(persisted, dto)).thenReturn(dto);
+        when(mapper.toDto(persisted)).thenReturn(dto);
 
         var result = service.update(dto);
 

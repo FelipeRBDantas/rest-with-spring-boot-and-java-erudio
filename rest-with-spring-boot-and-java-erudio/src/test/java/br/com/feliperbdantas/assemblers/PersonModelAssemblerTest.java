@@ -15,7 +15,7 @@ import java.util.List;
 class PersonModelAssemblerTest {
     MockPerson input;
 
-    private PersonModelAssembler assembler;
+    PersonModelAssembler assembler;
 
     @BeforeEach
     void setUp() {

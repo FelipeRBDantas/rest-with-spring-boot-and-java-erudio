@@ -1,4 +1,4 @@
-package br.com.feliperbdantas.mappers.v1.custom;
+package br.com.feliperbdantas.mappers.custom.v1;
 
 import br.com.feliperbdantas.builders.dto.v1.PersonDTOBuilder;
 import br.com.feliperbdantas.builders.model.v1.PersonBuilder;
