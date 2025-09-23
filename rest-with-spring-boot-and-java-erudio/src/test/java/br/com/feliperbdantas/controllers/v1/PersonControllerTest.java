@@ -1,6 +1,6 @@
 package br.com.feliperbdantas.controllers.v1;
 
-import br.com.feliperbdantas.mappers.v1.assemblers.PersonModelAssembler;
+import br.com.feliperbdantas.assemblers.PersonModelAssembler;
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
 import br.com.feliperbdantas.services.v1.impl.PersonServiceImpl;
 import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;

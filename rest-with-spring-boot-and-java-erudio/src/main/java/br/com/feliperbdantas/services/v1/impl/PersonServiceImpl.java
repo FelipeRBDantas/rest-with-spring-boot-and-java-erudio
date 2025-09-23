@@ -37,7 +37,7 @@ public class PersonServiceImpl implements PersonService {
     public List<PersonDTO> findAll() {
         logger.info("[V1] Finding all People.");
 
-        return mapper.convertEntitiesToDTOs(repository.findAll());
+        return mapper.toDtoList(repository.findAll());
     }
 
     @Transactional(
@@ -52,7 +52,7 @@ public class PersonServiceImpl implements PersonService {
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No Records found for this ID."));
 
-        return mapper.convertEntityToDTO(entity);
+        return mapper.toDto(entity);
     }
 
     @Transactional(
@@ -65,9 +65,9 @@ public class PersonServiceImpl implements PersonService {
 
         logger.info("[V1] Creating one Person.");
 
-        var entityFromDTO = mapper.convertDTOToEntity(person);
+        var entityFromDTO = mapper.toEntity(person);
 
-        return mapper.updateDTOFromEntity(repository.save(entityFromDTO), person);
+        return mapper.toDto(repository.save(entityFromDTO));
     }
 
     @Transactional(
@@ -85,9 +85,9 @@ public class PersonServiceImpl implements PersonService {
 
         /* BeanUtils.copyProperties(person, entity, "id"); */
 
-        var entityFromDTO = mapper.updateEntityFromDTO(person, entity);
+        var entityFromDTO = mapper.toEntity(person);
 
-        return mapper.updateDTOFromEntity(repository.save(entityFromDTO), person);
+        return mapper.toDto(repository.save(entityFromDTO));
     }
 
     @Transactional(

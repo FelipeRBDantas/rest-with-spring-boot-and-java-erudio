@@ -1,7 +1,6 @@
 package br.com.feliperbdantas.assemblers;
 
 import br.com.feliperbdantas.data.dto.v1.PersonDTO;
-import br.com.feliperbdantas.mappers.v1.assemblers.PersonModelAssembler;
 import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
