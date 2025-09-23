@@ -2,9 +2,9 @@ package br.com.feliperbdantas.unittests.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import br.com.feliperbdantas.data.dto.v1.PersonDTO;
-import br.com.feliperbdantas.mappers.PersonMapper;
-import br.com.feliperbdantas.models.Person;
+import br.com.feliperbdantas.application.dto.v1.PersonDTO;
+import br.com.feliperbdantas.application.mapper.PersonMapper;
+import br.com.feliperbdantas.domain.model.Person;
 import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
