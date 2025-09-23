@@ -1,4 +1,4 @@
-package br.com.feliperbdantas.services.v1.impl;
+package br.com.feliperbdantas.service.v1;
 
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 import br.com.feliperbdantas.application.service.v1.PersonServiceImpl;
@@ -6,7 +6,7 @@ import br.com.feliperbdantas.exception.RequiredObjectIsNullException;
 import br.com.feliperbdantas.application.mapper.PersonMapper;
 import br.com.feliperbdantas.domain.model.Person;
 import br.com.feliperbdantas.infrastructure.persistence.repository.PersonRepository;
-import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
+import br.com.feliperbdantas.unittest.mapper.mocks.MockPerson;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

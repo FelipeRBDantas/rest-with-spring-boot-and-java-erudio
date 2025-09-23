@@ -3,7 +3,7 @@ package br.com.feliperbdantas.controller.v1;
 import br.com.feliperbdantas.application.assembler.PersonModelAssembler;
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 import br.com.feliperbdantas.application.service.v1.PersonServiceImpl;
-import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
+import br.com.feliperbdantas.unittest.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

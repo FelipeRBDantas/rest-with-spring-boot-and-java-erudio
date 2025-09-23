@@ -1,11 +1,11 @@
-package br.com.feliperbdantas.unittests.mapper;
+package br.com.feliperbdantas.unittest.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 import br.com.feliperbdantas.application.mapper.PersonMapper;
 import br.com.feliperbdantas.domain.model.Person;
-import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
+import br.com.feliperbdantas.unittest.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;

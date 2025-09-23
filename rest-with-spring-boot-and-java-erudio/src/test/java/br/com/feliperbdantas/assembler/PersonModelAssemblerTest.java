@@ -1,8 +1,8 @@
-package br.com.feliperbdantas.assemblers;
+package br.com.feliperbdantas.assembler;
 
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 import br.com.feliperbdantas.application.assembler.PersonModelAssembler;
-import br.com.feliperbdantas.unittests.mapper.mocks.MockPerson;
+import br.com.feliperbdantas.unittest.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.hateoas.EntityModel;
