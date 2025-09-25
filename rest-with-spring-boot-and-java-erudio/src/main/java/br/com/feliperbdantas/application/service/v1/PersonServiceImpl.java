@@ -1,6 +1,7 @@
 package br.com.feliperbdantas.application.service.v1;
 
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
+import br.com.feliperbdantas.application.presenter.v1.PersonPresenter;
 import br.com.feliperbdantas.domain.service.PersonService;
 import br.com.feliperbdantas.exception.RequiredObjectIsNullException;
 import br.com.feliperbdantas.exception.ResourceNotFoundException;
@@ -28,6 +29,9 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     PersonMapper mapper;
 
+    @Autowired
+    PersonPresenter presenter;
+
     @Transactional(
             readOnly = true,
             propagation = Propagation.SUPPORTS,
@@ -52,7 +56,7 @@ public class PersonServiceImpl implements PersonService {
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No Records found for this ID."));
 
-        return mapper.toDto(entity);
+        return presenter.present(mapper.toDto(entity));
     }
 
     @Transactional(
