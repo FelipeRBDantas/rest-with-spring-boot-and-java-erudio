@@ -41,7 +41,7 @@ public class PersonServiceImpl implements PersonService {
     public List<PersonDTO> findAll() {
         logger.info("[V1] Finding all People.");
 
-        return mapper.toDtoList(repository.findAll());
+        return presenter.present(mapper.toDtoList(repository.findAll()));
     }
 
     @Transactional(
@@ -71,7 +71,7 @@ public class PersonServiceImpl implements PersonService {
 
         var entityFromDTO = mapper.toEntity(person);
 
-        return mapper.toDto(repository.save(entityFromDTO));
+        return presenter.present(mapper.toDto(repository.save(entityFromDTO)));
     }
 
     @Transactional(
@@ -91,7 +91,7 @@ public class PersonServiceImpl implements PersonService {
 
         var entityFromDTO = mapper.toEntity(person);
 
-        return mapper.toDto(repository.save(entityFromDTO));
+        return presenter.present(mapper.toDto(repository.save(entityFromDTO)));
     }
 
     @Transactional(

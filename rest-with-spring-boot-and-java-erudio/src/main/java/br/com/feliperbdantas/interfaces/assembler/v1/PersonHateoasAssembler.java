@@ -13,17 +13,23 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 public class PersonHateoasAssembler implements PersonPresenter {
     @Override
     public PersonDTO present(PersonDTO dto) {
-        dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel());
-        dto.add(linkTo(methodOn(PersonController.class).findAll()).withRel("findAll"));
-        dto.add(linkTo(methodOn(PersonController.class).create(dto)).withRel("create"));
-        dto.add(linkTo(methodOn(PersonController.class).update(dto)).withRel("update"));
-        dto.add(linkTo(methodOn(PersonController.class).delete(dto.getId())).withRel("delete"));
+        addLinks(dto);
 
         return dto;
     }
 
     @Override
     public List<PersonDTO> present(List<PersonDTO> dtos) {
-        return null;
+        return dtos.stream()
+                .peek(this::addLinks)
+                .toList();
+    }
+
+    private void addLinks(PersonDTO dto) {
+        dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel());
+        dto.add(linkTo(methodOn(PersonController.class).findAll()).withRel("findAll"));
+        dto.add(linkTo(methodOn(PersonController.class).create(dto)).withRel("create"));
+        dto.add(linkTo(methodOn(PersonController.class).update(dto)).withRel("update"));
+        dto.add(linkTo(methodOn(PersonController.class).delete(dto.getId())).withRel("delete"));
     }
 }
