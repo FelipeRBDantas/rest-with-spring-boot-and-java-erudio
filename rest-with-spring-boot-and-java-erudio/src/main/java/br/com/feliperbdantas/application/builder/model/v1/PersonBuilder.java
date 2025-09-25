@@ -1,4 +1,4 @@
-package br.com.feliperbdantas.infrastructure.builder.model.v1;
+package br.com.feliperbdantas.application.builder.model.v1;
 
 import br.com.feliperbdantas.domain.model.Person;
 

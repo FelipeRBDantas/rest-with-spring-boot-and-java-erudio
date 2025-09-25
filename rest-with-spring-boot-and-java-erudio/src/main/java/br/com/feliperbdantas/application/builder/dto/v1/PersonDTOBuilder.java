@@ -1,4 +1,4 @@
-package br.com.feliperbdantas.infrastructure.builder.dto.v1;
+package br.com.feliperbdantas.application.builder.dto.v1;
 
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 

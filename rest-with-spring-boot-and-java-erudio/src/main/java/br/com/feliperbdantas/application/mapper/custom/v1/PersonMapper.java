@@ -1,7 +1,7 @@
 package br.com.feliperbdantas.application.mapper.custom.v1;
 
-import br.com.feliperbdantas.infrastructure.builder.dto.v1.PersonDTOBuilder;
-import br.com.feliperbdantas.infrastructure.builder.model.v1.PersonBuilder;
+import br.com.feliperbdantas.application.builder.dto.v1.PersonDTOBuilder;
+import br.com.feliperbdantas.application.builder.model.v1.PersonBuilder;
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 import br.com.feliperbdantas.domain.model.Person;
 import org.springframework.stereotype.Service;
