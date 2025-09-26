@@ -189,7 +189,73 @@ class PersonServiceImplTest {
 
     @Test
     void update() {
+        Person person = input.mockEntity(1);
 
+        Person persisted = person;
+        persisted.setId(1L);
+
+        PersonDTO personDTO = input.mockDTO(1);
+
+        String pathRoot = "http://localhost:8080";
+
+        PersonDTO personDTOWithHateoas = input.mockDTO(1);
+        personDTOWithHateoas.setId(1L);
+        personDTOWithHateoas.add(Link.of(pathRoot.concat("/api/v1/person/1")).withSelfRel());
+        personDTOWithHateoas.add(Link.of(pathRoot.concat("/api/v1/person")).withRel("findAll"));
+        personDTOWithHateoas.add(Link.of(pathRoot.concat("/api/v1/person")).withRel("create"));
+        personDTOWithHateoas.add(Link.of(pathRoot.concat("/api/v1/person")).withRel("update"));
+        personDTOWithHateoas.add(Link.of(pathRoot.concat("/api/v1/person/1")).withRel("delete"));
+
+        when(mapper.toEntity(personDTO)).thenReturn(person);
+
+        when(repository.findById(1L)).thenReturn(Optional.of(person));
+
+        when(repository.save(person)).thenReturn(persisted);
+
+        when(mapper.toDto(person)).thenReturn(personDTO);
+
+        when(presenter.present(personDTO)).thenReturn(personDTOWithHateoas);
+
+        var result = service.update(personDTO);
+
+        assertNotNull(result);
+        assertNotNull(result.getId());
+        assertNotNull(result.getLinks());
+
+        assertTrue(
+                result.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("self")
+                                && link.getHref().endsWith("/api/v1/person/1"))
+        );
+
+        assertTrue(
+                result.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("findAll")
+                                && link.getHref().endsWith("/api/v1/person"))
+        );
+
+        assertTrue(
+                result.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("create")
+                                && link.getHref().endsWith("/api/v1/person"))
+        );
+
+        assertTrue(
+                result.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("update")
+                                && link.getHref().endsWith("/api/v1/person"))
+        );
+
+        assertTrue(
+                result.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("delete")
+                                && link.getHref().endsWith("/api/v1/person/1"))
+        );
+
+        assertEquals("Address Test1", result.getAddress());
+        assertEquals("First Name Test1", result.getFirstName());
+        assertEquals("Last Name Test1", result.getLastName());
+        assertEquals("Female", result.getGender());
     }
 
     @Test
@@ -199,6 +265,16 @@ class PersonServiceImplTest {
 
     @Test
     void delete() {
+        Person person = input.mockEntity(1);
+        person.setId(1L);
 
+        when(repository.findById(1L)).thenReturn(Optional.of(person));
+
+        service.delete(1L);
+
+        verify(repository, times(1)).findById(anyLong());
+        verify(repository, times(1)).delete(any(Person.class));
+
+        verifyNoMoreInteractions(repository);
     }
 }
