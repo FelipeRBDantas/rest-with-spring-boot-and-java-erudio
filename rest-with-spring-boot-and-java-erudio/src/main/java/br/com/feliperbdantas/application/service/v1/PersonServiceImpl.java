@@ -87,11 +87,9 @@ public class PersonServiceImpl implements PersonService {
         Person entity = repository.findById(person.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No Records found for this ID."));
 
-        /* BeanUtils.copyProperties(person, entity, "id"); */
+        mapper.updateFromDto(person, entity);
 
-        var entityFromDTO = mapper.toEntity(person);
-
-        return presenter.present(mapper.toDto(repository.save(entityFromDTO)));
+        return presenter.present(mapper.toDto(repository.save(entity)));
     }
 
     @Transactional(
