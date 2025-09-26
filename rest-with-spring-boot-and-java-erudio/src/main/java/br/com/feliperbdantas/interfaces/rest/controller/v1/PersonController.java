@@ -3,6 +3,7 @@ package br.com.feliperbdantas.interfaces.rest.controller.v1;
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 import br.com.feliperbdantas.domain.service.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -40,7 +41,15 @@ public class PersonController {
                             content = {
                                     @Content(
                                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                            schema = @Schema(implementation = PersonDTO.class)
+                                            array = @ArraySchema(schema = @Schema(implementation = PersonDTO.class))
+                                    ),
+                                    @Content(
+                                            mediaType = MediaType.APPLICATION_XML_VALUE,
+                                            array = @ArraySchema(schema = @Schema(implementation = PersonDTO.class))
+                                    ),
+                                    @Content(
+                                            mediaType = MediaType.APPLICATION_YAML_VALUE,
+                                            array = @ArraySchema(schema = @Schema(implementation = PersonDTO.class))
                                     )
                             }
                     ),
@@ -61,6 +70,36 @@ public class PersonController {
                     MediaType.APPLICATION_JSON_VALUE,
                     MediaType.APPLICATION_XML_VALUE,
                     MediaType.APPLICATION_YAML_VALUE
+            }
+    )
+    @Operation(
+            summary = "Find a Person",
+            description = "Find a specific person by your ID",
+            tags = {"People"},
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200",
+                            content = {
+                                    @Content(
+                                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                            schema = @Schema(implementation = PersonDTO.class)
+                                    ),
+                                    @Content(
+                                            mediaType = MediaType.APPLICATION_XML_VALUE,
+                                            schema = @Schema(implementation = PersonDTO.class)
+                                    ),
+                                    @Content(
+                                            mediaType = MediaType.APPLICATION_YAML_VALUE,
+                                            schema = @Schema(implementation = PersonDTO.class)
+                                    )
+                            }
+                    ),
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
     public ResponseEntity<PersonDTO> findById(@PathVariable("id") Long id) {
