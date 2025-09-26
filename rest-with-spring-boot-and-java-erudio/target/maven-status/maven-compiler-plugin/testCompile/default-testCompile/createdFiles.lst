@@ -1,6 +1,0 @@
-br\com\feliperbdantas\application\mapper\mocks\MockPerson.class
-br\com\feliperbdantas\application\mapper\ObjectMapperTest.class
-br\com\feliperbdantas\interfaces\rest\controller\v1\PersonControllerTest.class
-br\com\feliperbdantas\application\assembler\PersonModelAssemblerTest.class
-br\com\feliperbdantas\StartupTests.class
-br\com\feliperbdantas\application\service\v1\PersonServiceImplTest.class
