@@ -1,6 +1,7 @@
 package br.com.feliperbdantas.interfaces.rest.controller.v1;
 
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
+import br.com.feliperbdantas.application.dto.v1.wrapper.PersonsWrapperDTO;
 import br.com.feliperbdantas.domain.service.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -45,7 +46,7 @@ public class PersonController {
                                     ),
                                     @Content(
                                             mediaType = MediaType.APPLICATION_XML_VALUE,
-                                            array = @ArraySchema(schema = @Schema(implementation = PersonDTO.class))
+                                            schema = @Schema(implementation = PersonsWrapperDTO.class)
                                     ),
                                     @Content(
                                             mediaType = MediaType.APPLICATION_YAML_VALUE,
@@ -60,8 +61,10 @@ public class PersonController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
-    public ResponseEntity<List<PersonDTO>> findAll() {
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<PersonsWrapperDTO> findAll() {
+        List<PersonDTO> persons = service.findAll();
+
+        return ResponseEntity.ok(new PersonsWrapperDTO(persons));
     }
 
     @GetMapping(
