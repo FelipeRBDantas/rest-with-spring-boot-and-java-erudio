@@ -2,7 +2,7 @@ package br.com.feliperbdantas.application.service.v1;
 
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 import br.com.feliperbdantas.application.presenter.v1.PersonPresenter;
-import br.com.feliperbdantas.domain.service.PersonService;
+import br.com.feliperbdantas.application.service.v1.contract.PersonService;
 import br.com.feliperbdantas.exception.RequiredObjectIsNullException;
 import br.com.feliperbdantas.exception.ResourceNotFoundException;
 

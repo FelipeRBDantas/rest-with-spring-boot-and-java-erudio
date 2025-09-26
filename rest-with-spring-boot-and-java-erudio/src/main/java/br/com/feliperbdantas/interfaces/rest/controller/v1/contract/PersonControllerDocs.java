@@ -1,36 +1,19 @@
-package br.com.feliperbdantas.interfaces.rest.controller.v1;
+package br.com.feliperbdantas.interfaces.rest.controller.v1.contract;
 
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 import br.com.feliperbdantas.application.dto.v1.wrapper.PersonsWrapperDTO;
-import br.com.feliperbdantas.domain.service.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.util.List;
-
-@RestController("personControllerV1")
-@RequestMapping("/api/v1/person")
 @Tag(name = "People", description = "Endpoints for Managing People")
-public class PersonController {
-    @Autowired
-    private PersonService service;
-
-    @GetMapping(
-            produces = {
-                    MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE,
-                    MediaType.APPLICATION_YAML_VALUE
-            }
-    )
+public interface PersonControllerDocs {
     @Operation(
             summary = "Find All People",
             description = "Find All People",
@@ -61,20 +44,8 @@ public class PersonController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
-    public ResponseEntity<PersonsWrapperDTO> findAll() {
-        List<PersonDTO> persons = service.findAll();
+    public ResponseEntity<PersonsWrapperDTO> findAll();
 
-        return ResponseEntity.ok(new PersonsWrapperDTO(persons));
-    }
-
-    @GetMapping(
-            value = "/{id}",
-            produces = {
-                    MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE,
-                    MediaType.APPLICATION_YAML_VALUE
-            }
-    )
     @Operation(
             summary = "Find a Person",
             description = "Find a specific person by your ID",
@@ -105,22 +76,8 @@ public class PersonController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
-    public ResponseEntity<PersonDTO> findById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(service.findById(id));
-    }
+    public ResponseEntity<PersonDTO> findById(@PathVariable("id") Long id);
 
-    @PostMapping(
-            consumes = {
-                    MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE,
-                    MediaType.APPLICATION_YAML_VALUE
-            },
-            produces = {
-                    MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE,
-                    MediaType.APPLICATION_YAML_VALUE
-            }
-    )
     @Operation(summary = "Adds a new Person",
             description = "Adds a new person by passing in a JSON, XML or YML representation of the person.",
             tags = {"People"},
@@ -135,26 +92,8 @@ public class PersonController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
-    public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO person) {
-        PersonDTO personCreated = service.create(person);
+    public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO person);
 
-        return ResponseEntity
-                .created(URI.create("/v1/person/" + personCreated.getId()))
-                .body(personCreated);
-    }
-
-    @PutMapping(
-            consumes = {
-                    MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE,
-                    MediaType.APPLICATION_YAML_VALUE
-            },
-            produces = {
-                    MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE,
-                    MediaType.APPLICATION_YAML_VALUE
-            }
-    )
     @Operation(summary = "Updates a person's information",
             description = "Updates a person's information by passing in a JSON, XML or YML representation of the updated person.",
             tags = {"People"},
@@ -171,13 +110,8 @@ public class PersonController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
-    public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO person) {
-        return ResponseEntity.ok(service.update(person));
-    }
+    public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO person);
 
-    @DeleteMapping(
-            value = "/{id}"
-    )
     @Operation(summary = "Deletes a Person",
             description = "Deletes a specific person by their ID",
             tags = {"People"},
@@ -192,9 +126,5 @@ public class PersonController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
-    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-        service.delete(id);
-
-        return ResponseEntity.noContent().build();
-    }
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id);
 }

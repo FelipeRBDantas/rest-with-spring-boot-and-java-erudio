@@ -1,4 +1,4 @@
-package br.com.feliperbdantas.domain.service;
+package br.com.feliperbdantas.application.service.v1.contract;
 
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 
