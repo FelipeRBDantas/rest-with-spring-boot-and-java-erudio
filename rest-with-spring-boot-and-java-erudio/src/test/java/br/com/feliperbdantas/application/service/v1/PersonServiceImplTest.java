@@ -45,7 +45,113 @@ class PersonServiceImplTest {
 
     @Test
     void findAll() {
+        List<Person> persons = input.mockEntityList();
 
+        List<PersonDTO> personsDTO = input.mockDTOList();
+
+        String pathRoot = "http://localhost:8080";
+
+        List<PersonDTO> personsDTOWithHateoas = input.mockDTOList()
+                .stream()
+                .peek(personDTOWithHateoas -> {
+                            personDTOWithHateoas.add(Link.of(pathRoot.concat("/api/v1/person/" + personDTOWithHateoas.getId())).withSelfRel());
+                            personDTOWithHateoas.add(Link.of(pathRoot.concat("/api/v1/person")).withRel("findAll"));
+                            personDTOWithHateoas.add(Link.of(pathRoot.concat("/api/v1/person")).withRel("create"));
+                            personDTOWithHateoas.add(Link.of(pathRoot.concat("/api/v1/person")).withRel("update"));
+                            personDTOWithHateoas.add(Link.of(pathRoot.concat("/api/v1/person/" + personDTOWithHateoas.getId())).withRel("delete"));
+                })
+                .toList();
+
+        when(repository.findAll()).thenReturn(persons);
+
+        when(mapper.toDtoList(persons)).thenReturn(personsDTO);
+
+        when(presenter.present(personsDTO)).thenReturn(personsDTOWithHateoas);
+
+        var result = service.findAll();
+
+        assertNotNull(result);
+        assertEquals(14, result.size());
+
+        var resultPersonOne = result.get(1);
+
+        assertNotNull(resultPersonOne.getId());
+        assertNotNull(resultPersonOne.getLinks());
+
+        assertTrue(
+                resultPersonOne.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("self")
+                                && link.getHref().endsWith("/api/v1/person/1"))
+        );
+
+        assertTrue(
+                resultPersonOne.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("findAll")
+                                && link.getHref().endsWith("/api/v1/person"))
+        );
+
+        assertTrue(
+                resultPersonOne.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("create")
+                                && link.getHref().endsWith("/api/v1/person"))
+        );
+
+        assertTrue(
+                resultPersonOne.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("update")
+                                && link.getHref().endsWith("/api/v1/person"))
+        );
+
+        assertTrue(
+                resultPersonOne.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("delete")
+                                && link.getHref().endsWith("/api/v1/person/1"))
+        );
+
+        assertEquals("Address Test1", resultPersonOne.getAddress());
+        assertEquals("First Name Test1", resultPersonOne.getFirstName());
+        assertEquals("Last Name Test1", resultPersonOne.getLastName());
+        assertEquals("Female", resultPersonOne.getGender());
+
+        var resultPersonTwo = result.get(2);
+
+        assertNotNull(resultPersonTwo.getId());
+        assertNotNull(resultPersonTwo.getLinks());
+
+        assertTrue(
+                resultPersonTwo.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("self")
+                                && link.getHref().endsWith("/api/v1/person/2"))
+        );
+
+        assertTrue(
+                resultPersonTwo.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("findAll")
+                                && link.getHref().endsWith("/api/v1/person"))
+        );
+
+        assertTrue(
+                resultPersonTwo.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("create")
+                                && link.getHref().endsWith("/api/v1/person"))
+        );
+
+        assertTrue(
+                resultPersonTwo.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("update")
+                                && link.getHref().endsWith("/api/v1/person"))
+        );
+
+        assertTrue(
+                resultPersonTwo.getLinks().stream()
+                        .anyMatch(link -> link.getRel().value().equals("delete")
+                                && link.getHref().endsWith("/api/v1/person/2"))
+        );
+
+        assertEquals("Address Test2", resultPersonTwo.getAddress());
+        assertEquals("First Name Test2", resultPersonTwo.getFirstName());
+        assertEquals("Last Name Test2", resultPersonTwo.getLastName());
+        assertEquals("Male", resultPersonTwo.getGender());
     }
 
     @Test
