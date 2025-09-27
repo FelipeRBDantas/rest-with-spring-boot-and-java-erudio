@@ -1,4 +1,4 @@
-package br.com.feliperbdantas.exception;
+package br.com.feliperbdantas.interfaces.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -1,8 +1,8 @@
-package br.com.feliperbdantas.exception.handler;
+package br.com.feliperbdantas.interfaces.exception.handler;
 
-import br.com.feliperbdantas.exception.ExceptionResponse;
-import br.com.feliperbdantas.exception.RequiredObjectIsNullException;
-import br.com.feliperbdantas.exception.ResourceNotFoundException;
+import br.com.feliperbdantas.interfaces.exception.ExceptionResponse;
+import br.com.feliperbdantas.interfaces.exception.RequiredObjectIsNullException;
+import br.com.feliperbdantas.interfaces.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

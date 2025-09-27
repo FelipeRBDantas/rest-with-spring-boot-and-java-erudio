@@ -1,4 +1,4 @@
-package br.com.feliperbdantas.exception;
+package br.com.feliperbdantas.interfaces.exception;
 
 import java.util.Date;
 

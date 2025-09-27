@@ -3,12 +3,12 @@ package br.com.feliperbdantas.application.service.v1;
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 import br.com.feliperbdantas.application.presenter.v1.PersonPresenter;
 import br.com.feliperbdantas.application.service.v1.contract.PersonService;
-import br.com.feliperbdantas.exception.RequiredObjectIsNullException;
-import br.com.feliperbdantas.exception.ResourceNotFoundException;
 
 import br.com.feliperbdantas.application.mapper.PersonMapper;
 import br.com.feliperbdantas.domain.model.Person;
 import br.com.feliperbdantas.infrastructure.persistence.repository.PersonRepository;
+import br.com.feliperbdantas.interfaces.exception.RequiredObjectIsNullException;
+import br.com.feliperbdantas.interfaces.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

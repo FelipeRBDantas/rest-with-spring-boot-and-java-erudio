@@ -1,7 +1,7 @@
 package br.com.feliperbdantas.application.dto.v1.wrapper;
 
+import br.com.feliperbdantas.application.dto.v1.BookDTO;
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.AllArgsConstructor;
@@ -15,9 +15,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JacksonXmlRootElement(localName = "persons")
-public class PersonsWrapperDTO {
-    @JacksonXmlElementWrapper(useWrapping = false)
-    @JacksonXmlProperty(localName = "person")
-    private List<PersonDTO> persons;
+@JacksonXmlRootElement(localName = "books")
+public class BooksWrapperDTO {
+    @JacksonXmlProperty(localName = "book")
+    private List<BookDTO> books;
 }
