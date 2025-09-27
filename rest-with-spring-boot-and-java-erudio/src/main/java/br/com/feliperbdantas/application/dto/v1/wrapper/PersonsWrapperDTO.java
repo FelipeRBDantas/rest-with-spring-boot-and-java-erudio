@@ -4,20 +4,22 @@ import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @JacksonXmlRootElement(localName = "persons")
 public class PersonsWrapperDTO {
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "person")
     private List<PersonDTO> persons;
+
+    public PersonsWrapperDTO() {}
+
+    public PersonsWrapperDTO(List<PersonDTO> persons) {
+        this.persons = persons;
+    }
+
+    public List<PersonDTO> getPersons() { return persons; }
+
+    public void setPersons(List<PersonDTO> persons) { this.persons = persons; }
 }
