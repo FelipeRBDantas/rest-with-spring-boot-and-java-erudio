@@ -5,7 +5,7 @@ import br.com.feliperbdantas.application.presenter.v1.PersonPresenter;
 import br.com.feliperbdantas.application.mapper.PersonMapper;
 import br.com.feliperbdantas.domain.model.Person;
 import br.com.feliperbdantas.infrastructure.persistence.repository.PersonRepository;
-import br.com.feliperbdantas.application.mapper.mocks.MockPerson;
+import br.com.feliperbdantas.application.mocks.MockPerson;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

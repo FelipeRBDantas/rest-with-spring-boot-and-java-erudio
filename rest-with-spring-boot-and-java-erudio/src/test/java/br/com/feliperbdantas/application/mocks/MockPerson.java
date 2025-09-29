@@ -1,4 +1,4 @@
-package br.com.feliperbdantas.application.mapper.mocks;
+package br.com.feliperbdantas.application.mocks;
 
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 import br.com.feliperbdantas.domain.model.Person;

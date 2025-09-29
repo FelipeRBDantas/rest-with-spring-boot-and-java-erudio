@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 import br.com.feliperbdantas.domain.model.Person;
-import br.com.feliperbdantas.application.mapper.mocks.MockPerson;
+import br.com.feliperbdantas.application.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;

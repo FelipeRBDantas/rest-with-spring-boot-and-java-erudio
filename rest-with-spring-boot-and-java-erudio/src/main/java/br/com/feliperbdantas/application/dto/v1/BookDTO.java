@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 @JsonPropertyOrder({
@@ -22,7 +23,7 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
     private String author;
 
     @JsonProperty("launch_date")
-    private String launchDate;
+    private Date launchDate;
 
     private Double price;
 
@@ -46,11 +47,11 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
         this.author = author;
     }
 
-    public String getLaunchDate() {
+    public Date getLaunchDate() {
         return launchDate;
     }
 
-    public void setLaunchDate(String launchDate) {
+    public void setLaunchDate(Date launchDate) {
         this.launchDate = launchDate;
     }
 
