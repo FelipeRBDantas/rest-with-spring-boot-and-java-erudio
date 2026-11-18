@@ -10,7 +10,6 @@ import br.com.feliperbdantas.interfaces.exception.RequiredObjectIsNullException;
 import br.com.feliperbdantas.interfaces.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -20,16 +19,19 @@ import java.util.List;
 
 @Service("bookServiceV1")
 public class BookServiceImpl implements BookService {
-    private Logger logger = LoggerFactory.getLogger(BookServiceImpl.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(BookServiceImpl.class.getName());
 
-    @Autowired
-    BookRepository repository;
+    private final BookRepository repository;
 
-    @Autowired
-    BookMapper mapper;
+    private final BookMapper mapper;
 
-    @Autowired
-    BookPresenter presenter;
+    private final BookPresenter presenter;
+
+    public BookServiceImpl(BookRepository repository, BookMapper mapper, BookPresenter presenter) {
+        this.repository = repository;
+        this.mapper = mapper;
+        this.presenter = presenter;
+    }
 
     @Transactional(
             readOnly = true,

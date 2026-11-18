@@ -4,7 +4,6 @@ import br.com.feliperbdantas.application.dto.v1.BookDTO;
 import br.com.feliperbdantas.application.dto.v1.wrapper.BooksWrapperDTO;
 import br.com.feliperbdantas.application.service.v1.contract.BookService;
 import br.com.feliperbdantas.interfaces.rest.controller.v1.contract.BookControllerDocs;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +14,11 @@ import java.util.List;
 @RestController("bookControllerV1")
 @RequestMapping("/api/v1/book")
 public class BookControllerImpl implements BookControllerDocs {
-    @Autowired
-    private BookService service;
+    private final BookService service;
+
+    public BookControllerImpl(BookService service) {
+        this.service = service;
+    }
 
     @GetMapping(
             produces = {

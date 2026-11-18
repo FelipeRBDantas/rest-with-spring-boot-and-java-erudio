@@ -4,7 +4,6 @@ import br.com.feliperbdantas.application.dto.v1.PersonDTO;
 import br.com.feliperbdantas.application.dto.v1.wrapper.PersonsWrapperDTO;
 import br.com.feliperbdantas.application.service.v1.contract.PersonService;
 import br.com.feliperbdantas.interfaces.rest.controller.v1.contract.PersonControllerDocs;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +14,11 @@ import java.util.List;
 @RestController("personControllerV1")
 @RequestMapping("/api/v1/person")
 public class PersonControllerImpl implements PersonControllerDocs {
-    @Autowired
-    private PersonService service;
+    private final PersonService service;
+
+    public PersonControllerImpl(PersonService service) {
+        this.service = service;
+    }
 
     @GetMapping(
             produces = {
